@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "modernizacao-sistemas-legados",
+    "title": "Modernização de Sistemas Legados",
+    "description": "A modernização de sistemas legados é o processo de atualização de softwares antigos que, apesar de funcionais, utilizam tecnologias obsoletas que travam o crescimento do seu negócio.<br/><br/>A Hands On! atua refatorando, migrando e reconstruindo aplicações de forma segura e progressiva.",
+    "h2_1": "Por que modernizar seu sistema legado?",
+    "p_1": "Manter um sistema antigo muitas vezes custa mais do que atualizá-lo.<br/><br/>Com o tempo, a tecnologia se torna incompatível, os profissionais desaparecem do mercado e o risco de interrupção aumenta drasticamente.",
+    "h2_2": "Nossa abordagem",
+    "p_2": "Não começamos programando.<br/><br/>Nossa metodologia baseada no Legacy Assessment nos permite mapear completamente suas regras de negócio antes de qualquer migração, garantindo zero perda de conhecimento e a continuidade segura da sua operação."
+  },
+  {
+    "slug": "sistema-sem-codigo-fonte",
+    "title": "Substituição de Sistema Sem Código-Fonte",
+    "description": "Possui um sistema crítico funcionando mas a sua empresa perdeu o acesso ao código-fonte?<br/><br/>Nós reconstruímos a sua aplicação através de Engenharia Reversa, analisando o banco de dados e o comportamento em tela.",
+    "h2_1": "O risco de depender do que você não controla",
+    "p_1": "Um sistema sem código-fonte é uma bomba-relógio.<br/><br/>Qualquer mudança de infraestrutura, atualização de sistema operacional ou problema de segurança pode paralisar sua operação de forma irreversível.",
+    "h2_2": "Como recuperamos seu sistema",
+    "p_2": "Utilizamos técnicas avançadas de Engenharia Reversa.<br/><br/>Analisamos a estrutura do banco de dados existente, rastreamos o tráfego de rede e mapeamos a interface visual para extrair de volta as regras de negócio perdidas e reconstruir um novo software idêntico e moderno."
+  },
+  {
+    "slug": "migracao-access",
+    "title": "Migração de Access para Aplicação Web",
+    "description": "Bancos de dados e sistemas construídos em Microsoft Access costumam travar, corromper dados e impedir o acesso remoto.<br/><br/>A Hands On! migra sua operação Access para uma aplicação web moderna e segura na nuvem.",
+    "h2_1": "O limite do Microsoft Access",
+    "p_1": "O Access é excelente para pequenos controles, mas quando seu negócio cresce, os arquivos tornam-se lentos e corrompem facilmente com múltiplos acessos simultâneos.",
+    "h2_2": "Solução Web",
+    "p_2": "Migramos seu banco de dados para SQL Server ou PostgreSQL e transformamos seus formulários e relatórios em um sistema Web seguro, acessível de qualquer dispositivo e preparado para múltiplos usuários reais."
+  },
+  {
+    "slug": "excel-para-sistema",
+    "title": "Transformação de Excel para Software Web",
+    "description": "Sua empresa opera através de planilhas de Excel complexas e arriscadas?<br/><br/>Transformamos suas lógicas e macros do Excel em um software corporativo estruturado, auditável e seguro.",
+    "h2_1": "Quando o Excel se torna um perigo",
+    "p_1": "Planilhas que circulam por e-mail, fórmulas quebradas por erro humano e falta de auditoria de quem modificou os dados geram riscos financeiros enormes.<br/><br/>O Excel não foi feito para ser o ERP da sua empresa.",
+    "h2_2": "A transformação",
+    "p_2": "Analisamos todas as suas abas, macros e fórmulas matemáticas, transformando tudo em regras de backend sólidas e em telas intuitivas.<br/><br/>O resultado é o fim da duplicidade de dados e o início da automação corporativa."
+  },
+  {
+    "slug": "migracao-banco-dados",
+    "title": "Migração de Banco de Dados",
+    "description": "Extração, transformação, limpeza e migração (ETL) de bancos de dados antigos ou legados para ambientes em nuvem, garantindo 100% de integridade das suas informações históricas.",
+    "h2_1": "Protegendo o seu maior ativo",
+    "p_1": "Migrar dados não é apenas copiar arquivos.<br/><br/>É garantir que décadas de informações de clientes, vendas e faturamento sejam convertidos perfeitamente para as novas estruturas de banco de dados sem qualquer divergência.",
+    "h2_2": "Processo Validador",
+    "p_2": "Utilizamos um processo contínuo de Profile, Cleanse, Transform, Migrate e Reconcile, gerando relatórios de reconciliação para que você tenha a prova matemática de que nada foi perdido na transição."
+  },
+  {
+    "slug": "engenharia-reversa-software",
+    "title": "Engenharia Reversa de Software",
+    "description": "Compreenda, recupere e documente o funcionamento exato de sistemas antigos ou de terceiros através de nossa metodologia de descoberta reversa, essencial para auditoria ou reconstrução.",
+    "h2_1": "Recuperando o Conhecimento",
+    "p_1": "Ao longo dos anos, os profissionais que construíram seu software saem da empresa e levam o conhecimento.<br/><br/>Nossa Engenharia Reversa redescobre essas lógicas e gera o \"Legacy Blueprint\" definitivo da sua aplicação.",
+    "h2_2": "Abordagem Multidirecional",
+    "p_2": "Investigamos telas, tabelas no banco de dados, pacotes de rede e manuais antigos para documentar regras de negócio que estavam ocultas.<br/><br/>Só reconstruímos depois que dominamos as regras."
+  },
+  {
+    "slug": "consultoria-sistemas",
+    "title": "Consultoria de Sistemas e Arquitetura",
+    "description": "Desenhamos a estratégia tecnológica certa para a sua modernização.<br/><br/>Avaliamos processos, integrações, APIs, dados e definimos a melhor arquitetura de transição para sua empresa.",
+    "h2_1": "Planejamento Estratégico em TI",
+    "p_1": "Modernizar um software central é arriscado.<br/><br/>Nossos especialistas mapeiam a arquitetura atual e propõem roteiros viáveis de modernização progressiva, com o menor impacto possível na operação.",
+    "h2_2": "Desenho de Soluções",
+    "p_2": "Entregamos diagramas de arquitetura (Target Architecture), mapas de dependência técnica e um cronograma de migração passo a passo desenhado especificamente para a realidade do seu fluxo de caixa e risco."
+  },
+  {
+    "slug": "desenvolvimento-software",
+    "title": "Desenvolvimento de Software Sob Medida",
+    "description": "Após compreendermos as regras e o passado da sua operação, construímos aplicações web e sistemas sob medida com arquitetura escalável e alta segurança para o seu futuro.",
+    "h2_1": "Criando o seu novo sistema",
+    "p_1": "Diferente de fábricas de software tradicionais, nós só iniciamos o desenvolvimento sob medida quando o diagnóstico e as regras legadas estão totalmente estabilizados.",
+    "h2_2": "Qualidade e Nuvem",
+    "p_2": "Utilizamos stacks modernas como Next.js, Node.js e PostgreSQL, hospedados em infraestruturas elásticas.<br/><br/>Seu novo software será rápido, seguro e nunca mais se tornará uma \"caixa preta\" sem documentação."
+  }
+]
