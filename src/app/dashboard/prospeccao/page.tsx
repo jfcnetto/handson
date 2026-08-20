@@ -19,6 +19,7 @@ export default function ProspeccaoPage() {
   const [adding, setAdding] = useState<string | null>(null)
   const [addedProspects, setAddedProspects] = useState<string[]>([])
   const [filterType, setFilterType] = useState('ALL')
+  const [feedbackMessage, setFeedbackMessage] = useState<{type: 'success' | 'error', text: string} | null>(null)
 
   useEffect(() => {
     fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
@@ -76,11 +77,17 @@ export default function ProspeccaoPage() {
     const res = await addProspectToFunnel(prospect, reason)
     
     if (res.success) {
-      alert(`✅ ${prospect.name} adicionado ao Kanban com sucesso!`)
+      setFeedbackMessage({ type: 'success', text: `✅ ${prospect.name} adicionado ao Kanban com sucesso!` })
       setAddedProspects(prev => [...prev, prospect.name])
     } else {
-      alert(`❌ Erro ao adicionar: ${res.error}`)
+      setFeedbackMessage({ type: 'error', text: `❌ Erro ao adicionar: ${res.error}` })
     }
+    
+    // Limpar mensagem após 3 segundos
+    setTimeout(() => {
+      setFeedbackMessage(null)
+    }, 3000)
+    
     setAdding(null)
   }
 
@@ -175,6 +182,14 @@ export default function ProspeccaoPage() {
       {error && (
         <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-6 border border-red-200">
           {error}
+        </div>
+      )}
+
+      {feedbackMessage && (
+        <div className={`fixed top-4 right-4 p-4 rounded-lg shadow-lg border z-50 transition-all ${
+          feedbackMessage.type === 'success' ? 'bg-green-50 border-green-200 text-green-800' : 'bg-red-50 border-red-200 text-red-800'
+        }`}>
+          {feedbackMessage.text}
         </div>
       )}
 
