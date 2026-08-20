@@ -1,4 +1,4 @@
-export const metadata = {
+﻿export const metadata = {
   title: 'Política de Privacidade | Hands On!',
   description: 'Nossa política de privacidade.'
 }

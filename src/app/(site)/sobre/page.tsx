@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Sobre Nós | Hands On!',
@@ -10,6 +11,9 @@ export default function SobrePage() {
     <div className="bg-white min-h-screen pt-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Sobre Nós</h1>
+        <div className="mb-10">
+          <Image src="/hero.jpg" alt="Equipe analisando arquitetura de software em tela de vidro corporativa" className="w-full rounded-2xl shadow-xl border border-slate-200 object-cover aspect-[21/9]" width={1200} height={500} />
+        </div>
         <div className="prose prose-lg text-slate-700 max-w-none">
           <p>
             Desde a nossa fundação em <strong>2007</strong>, a Hands On! tem sido uma referência em engenharia reversa, modernização de sistemas legados e migração de bancos de dados.

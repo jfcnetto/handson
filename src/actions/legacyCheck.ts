@@ -74,7 +74,18 @@ export async function submitLegacyCheck(data: any) {
       }
     })
 
-    return { success: true, leadId: lead.id, legacyComplexityScore, estimatedRangeMin: estimateMin, estimatedRangeMax: estimateMax }
+    return { 
+      success: true, 
+      leadId: lead.id, 
+      legacyComplexityScore, 
+      reverseEngineeringRisk,
+      businessCriticalityScore,
+      hasSourceCode: data.hasSourceCode,
+      knowledgeCentralization: data.knowledgeCentralization,
+      database: data.database,
+      estimatedRangeMin: estimateMin, 
+      estimatedRangeMax: estimateMax 
+    }
   } catch (error) {
     console.error('Submit Legacy Check Error:', error)
     return { success: false, error: 'Erro ao processar avaliação.' }

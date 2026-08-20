@@ -1,4 +1,4 @@
-import DiagnosticoForm from '@/components/DiagnosticoForm'
+﻿import DiagnosticoForm from '@/components/DiagnosticoForm'
 
 export default function LegacyCheckPage() {
   return (

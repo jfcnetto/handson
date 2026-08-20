@@ -1,4 +1,4 @@
-export const metadata = {
+﻿export const metadata = {
   title: 'Termos de Uso | Hands On!',
   description: 'Nossos termos de uso.'
 }

@@ -29,6 +29,7 @@ export default function Header() {
               <div className="absolute top-full left-0 w-56 bg-white border border-slate-200 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="py-2">
                   <Link href="/modernizacao-sistemas-legados" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Sistemas Legados</Link>
+                  <Link href="/engenharia-reversa-software" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Engenharia Reversa</Link>
                   <Link href="/sistema-sem-codigo-fonte" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Sem Código-Fonte</Link>
                   <Link href="/excel-para-sistema" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Excel para Web</Link>
                   <Link href="/migracao-access" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Migração Access</Link>
@@ -36,7 +37,6 @@ export default function Header() {
               </div>
             </div>
 
-            <Link href="/engenharia-reversa-software" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Engenharia Reversa</Link>
             <Link href="/contato" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Contato</Link>
             <Link href="/sobre" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Sobre Nós</Link>
           </nav>
@@ -85,6 +85,7 @@ export default function Header() {
               {isServicesOpen && (
                 <div className="pl-6 space-y-1 mt-1">
                   <Link href="/modernizacao-sistemas-legados" className="block px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Sistemas Legados</Link>
+                  <Link href="/engenharia-reversa-software" className="block px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Engenharia Reversa</Link>
                   <Link href="/sistema-sem-codigo-fonte" className="block px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Sem Código-Fonte</Link>
                   <Link href="/excel-para-sistema" className="block px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Excel para Web</Link>
                   <Link href="/migracao-access" className="block px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Migração Access</Link>
@@ -92,7 +93,6 @@ export default function Header() {
               )}
             </div>
 
-            <Link href="/engenharia-reversa-software" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Engenharia Reversa</Link>
             <Link href="/contato" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Contato</Link>
             <Link href="/sobre" className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50" onClick={() => setIsMobileMenuOpen(false)}>Sobre Nós</Link>
             
