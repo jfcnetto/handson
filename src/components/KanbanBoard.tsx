@@ -514,26 +514,27 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
             
             {/* Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-start bg-slate-50">
-              <div className="flex-grow pr-4">
+            <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center bg-slate-50 gap-4">
+              <div className="flex-grow w-full md:w-auto pr-0 md:pr-4">
                 {isEditingInfo ? (
                   <div className="flex gap-2 items-center mb-2">
-                    <input type="text" value={editCompany} onChange={e => setEditCompany(e.target.value)} className="font-bold text-xl px-2 py-1 border rounded" placeholder="Empresa" />
+                    <input type="text" value={editCompany} onChange={e => setEditCompany(e.target.value)} className="font-bold text-xl px-2 py-1 border rounded w-full" placeholder="Empresa" />
                   </div>
                 ) : (
                   <h2 className="text-xl font-bold text-slate-900">{selectedLead.company}</h2>
                 )}
                 
                 {isEditingInfo ? (
-                  <div className="flex gap-2 items-center">
-                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} className="text-sm px-2 py-1 border rounded text-slate-900" placeholder="Nome" />
-                    <span className="text-sm text-slate-500">- {selectedLead.jobTitle}</span>
+                  <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center mt-2">
+                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} className="text-sm px-2 py-1 border rounded text-slate-900 w-full sm:w-auto" placeholder="Nome" />
+                    <span className="text-sm text-slate-500 hidden sm:inline">-</span>
+                    <span className="text-sm text-slate-500">{selectedLead.jobTitle}</span>
                   </div>
                 ) : (
                   <p className="text-sm text-slate-500">{selectedLead.name} - {selectedLead.jobTitle}</p>
                 )}
               </div>
-              <div className="flex gap-2 flex-shrink-0">
+              <div className="flex flex-wrap gap-2 flex-shrink-0 w-full md:w-auto">
                 {isEditingInfo ? (
                   <>
                     <button onClick={handleSaveBasicInfo} disabled={updating === selectedLead.id} className="px-3 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition">Salvar</button>
@@ -677,49 +678,47 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
             </div>
 
             {/* Footer / Actions */}
-            <div className="px-6 py-4 border-t border-slate-100 bg-white flex justify-between items-center gap-3">
-              <div>
+            <div className="px-6 py-4 border-t border-slate-100 bg-white flex flex-col gap-3">
+              <div className="flex flex-wrap gap-2">
                 <Link 
                   href={`/dashboard/contrato/${selectedLead.id}`}
                   target="_blank"
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition shadow-sm mb-2"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition shadow-sm flex-grow sm:flex-grow-0"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
                   Gerar Contrato (PDF)
                 </Link>
                 <button 
                   onClick={() => setShowEmailModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold text-sm hover:bg-purple-700 transition shadow-sm"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold text-sm hover:bg-purple-700 transition shadow-sm flex-grow sm:flex-grow-0"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
-                  Gerar E-mail Premium
+                  E-mail Premium
                 </button>
+                <button
+                  onClick={handleSendBotMessage}
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold text-sm hover:bg-indigo-700 transition shadow-sm flex-grow sm:flex-grow-0"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                  Disparar Bot
+                </button>
+                <a 
+                  href={`mailto:${selectedLead.email}`}
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-200 transition flex-grow sm:flex-grow-0"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  E-mail
+                </a>
+                <a 
+                  href={`https://wa.me/${selectedLead.phone?.replace(/\D/g, '') || ''}?text=${encodeURIComponent(premiumEmailBody)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg font-semibold text-sm hover:bg-emerald-600 transition shadow-sm flex-grow sm:flex-grow-0"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  WhatsApp
+                </a>
               </div>
-              <div className="flex gap-3">
-              <button
-                onClick={handleSendBotMessage}
-                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold text-sm hover:bg-indigo-700 transition shadow-sm"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                Disparar Bot
-              </button>
-              <a 
-                href={`mailto:${selectedLead.email}`}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-200 transition"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                E-mail
-              </a>
-              <a 
-                href={`https://wa.me/${selectedLead.phone?.replace(/\D/g, '') || ''}?text=${encodeURIComponent(premiumEmailBody)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg font-semibold text-sm hover:bg-emerald-600 transition shadow-sm"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                WhatsApp Manual
-              </a>
-            </div>
           </div>
         </div>
         </div>
@@ -764,25 +763,25 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               </div>
             </div>
             
-            <div className="px-6 py-4 border-t border-slate-100 bg-white flex justify-end gap-3">
-              <div className="flex gap-3">
+            <div className="px-6 py-4 border-t border-slate-100 bg-white flex flex-col sm:flex-row justify-end gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <a 
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${selectedLead.email}&su=${encodeURIComponent(premiumEmailSubject)}&body=${encodeURIComponent(premiumEmailBody)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-6 py-2 bg-red-500 text-white rounded-lg font-bold text-sm hover:bg-red-600 transition shadow-sm flex items-center gap-2"
+                  className="px-6 py-2 bg-red-500 text-white rounded-lg font-bold text-sm hover:bg-red-600 transition shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
-                  Abrir Rascunho no Gmail
+                  Gmail
                 </a>
                 <a 
                   href={`https://wa.me/${selectedLead.phone?.replace(/\D/g, '') || ''}?text=${encodeURIComponent(premiumEmailBody)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-6 py-2 bg-emerald-500 text-white rounded-lg font-bold text-sm hover:bg-emerald-600 transition shadow-sm flex items-center gap-2"
+                  className="px-6 py-2 bg-emerald-500 text-white rounded-lg font-bold text-sm hover:bg-emerald-600 transition shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  Enviar Rascunho no WhatsApp
+                  WhatsApp
                 </a>
               </div>
             </div>
