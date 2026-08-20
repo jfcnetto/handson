@@ -1,78 +1,78 @@
-Ôªøimport fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 
 const pages = [
   {
     slug: 'modernizacao-sistemas-legados',
-    title: 'Moderniza√ß√£o de Sistemas Legados',
-    description: 'A moderniza√ß√£o de sistemas legados √© o processo de atualiza√ß√£o de softwares antigos que, apesar de funcionais, utilizam tecnologias obsoletas que travam o crescimento do seu neg√≥cio. A Hands On! atua refatorando, migrando e reconstruindo aplica√ß√µes de forma segura e progressiva.',
+    title: 'ModernizaÁ„o de Sistemas Legados',
+    description: 'A modernizaÁ„o de sistemas legados È o processo de atualizaÁ„o de softwares antigos que, apesar de funcionais, utilizam tecnologias obsoletas que travam o crescimento do seu negÛcio. A Hands On! atua refatorando, migrando e reconstruindo aplicaÁıes de forma segura e progressiva.',
     h2_1: 'Por que modernizar seu sistema legado?',
-    p_1: 'Manter um sistema antigo muitas vezes custa mais do que atualiz√°-lo. Com o tempo, a tecnologia se torna incompat√≠vel, os profissionais desaparecem do mercado e o risco de interrup√ß√£o aumenta drasticamente.',
+    p_1: 'Manter um sistema antigo muitas vezes custa mais do que atualiz·-lo. Com o tempo, a tecnologia se torna incompatÌvel, os profissionais desaparecem do mercado e o risco de interrupÁ„o aumenta drasticamente.',
     h2_2: 'Nossa abordagem',
-    p_2: 'N√£o come√ßamos programando. Nossa metodologia baseada no Legacy Assessment nos permite mapear completamente suas regras de neg√≥cio antes de qualquer migra√ß√£o, garantindo zero perda de conhecimento e a continuidade segura da sua opera√ß√£o.'
+    p_2: 'N„o comeÁamos programando. Nossa metodologia baseada no Legacy Assessment nos permite mapear completamente suas regras de negÛcio antes de qualquer migraÁ„o, garantindo zero perda de conhecimento e a continuidade segura da sua operaÁ„o.'
   },
   {
     slug: 'sistema-sem-codigo-fonte',
-    title: 'Substitui√ß√£o de Sistema Sem C√≥digo-Fonte',
-    description: 'Possui um sistema cr√≠tico funcionando mas a sua empresa perdeu o acesso ao c√≥digo-fonte? N√≥s reconstru√≠mos a sua aplica√ß√£o atrav√©s de Engenharia Reversa, analisando o banco de dados e o comportamento em tela.',
-    h2_1: 'O risco de depender do que voc√™ n√£o controla',
-    p_1: 'Um sistema sem c√≥digo-fonte √© uma bomba-rel√≥gio. Qualquer mudan√ßa de infraestrutura, atualiza√ß√£o de sistema operacional ou problema de seguran√ßa pode paralisar sua opera√ß√£o de forma irrevers√≠vel.',
+    title: 'SubstituiÁ„o de Sistema Sem CÛdigo-Fonte',
+    description: 'Possui um sistema crÌtico funcionando mas a sua empresa perdeu o acesso ao cÛdigo-fonte? NÛs reconstruÌmos a sua aplicaÁ„o atravÈs de Engenharia Reversa, analisando o banco de dados e o comportamento em tela.',
+    h2_1: 'O risco de depender do que vocÍ n„o controla',
+    p_1: 'Um sistema sem cÛdigo-fonte È uma bomba-relÛgio. Qualquer mudanÁa de infraestrutura, atualizaÁ„o de sistema operacional ou problema de seguranÁa pode paralisar sua operaÁ„o de forma irreversÌvel.',
     h2_2: 'Como recuperamos seu sistema',
-    p_2: 'Utilizamos t√©cnicas avan√ßadas de Engenharia Reversa. Analisamos a estrutura do banco de dados existente, rastreamos o tr√°fego de rede e mapeamos a interface visual para extrair de volta as regras de neg√≥cio perdidas e reconstruir um novo software id√™ntico e moderno.'
+    p_2: 'Utilizamos tÈcnicas avanÁadas de Engenharia Reversa. Analisamos a estrutura do banco de dados existente, rastreamos o tr·fego de rede e mapeamos a interface visual para extrair de volta as regras de negÛcio perdidas e reconstruir um novo software idÍntico e moderno.'
   },
   {
     slug: 'migracao-access',
-    title: 'Migra√ß√£o de Access para Aplica√ß√£o Web',
-    description: 'Bancos de dados e sistemas constru√≠dos em Microsoft Access costumam travar, corromper dados e impedir o acesso remoto. A Hands On! migra sua opera√ß√£o Access para uma aplica√ß√£o web moderna e segura na nuvem.',
+    title: 'MigraÁ„o de Access para AplicaÁ„o Web',
+    description: 'Bancos de dados e sistemas construÌdos em Microsoft Access costumam travar, corromper dados e impedir o acesso remoto. A Hands On! migra sua operaÁ„o Access para uma aplicaÁ„o web moderna e segura na nuvem.',
     h2_1: 'O limite do Microsoft Access',
-    p_1: 'O Access √© excelente para pequenos controles, mas quando seu neg√≥cio cresce, os arquivos tornam-se lentos e corrompem facilmente com m√∫ltiplos acessos simult√¢neos.',
-    h2_2: 'Solu√ß√£o Web',
-    p_2: 'Migramos seu banco de dados para SQL Server ou PostgreSQL e transformamos seus formul√°rios e relat√≥rios em um sistema Web seguro, acess√≠vel de qualquer dispositivo e preparado para m√∫ltiplos usu√°rios reais.'
+    p_1: 'O Access È excelente para pequenos controles, mas quando seu negÛcio cresce, os arquivos tornam-se lentos e corrompem facilmente com m˙ltiplos acessos simult‚neos.',
+    h2_2: 'SoluÁ„o Web',
+    p_2: 'Migramos seu banco de dados para SQL Server ou PostgreSQL e transformamos seus formul·rios e relatÛrios em um sistema Web seguro, acessÌvel de qualquer dispositivo e preparado para m˙ltiplos usu·rios reais.'
   },
   {
     slug: 'excel-para-sistema',
-    title: 'Transforma√ß√£o de Excel para Software Web',
-    description: 'Sua empresa opera atrav√©s de planilhas de Excel complexas e arriscadas? Transformamos suas l√≥gicas e macros do Excel em um software corporativo estruturado, audit√°vel e seguro.',
+    title: 'TransformaÁ„o de Excel para Software Web',
+    description: 'Sua empresa opera atravÈs de planilhas de Excel complexas e arriscadas? Transformamos suas lÛgicas e macros do Excel em um software corporativo estruturado, audit·vel e seguro.',
     h2_1: 'Quando o Excel se torna um perigo',
-    p_1: 'Planilhas que circulam por e-mail, f√≥rmulas quebradas por erro humano e falta de auditoria de quem modificou os dados geram riscos financeiros enormes. O Excel n√£o foi feito para ser o ERP da sua empresa.',
-    h2_2: 'A transforma√ß√£o',
-    p_2: 'Analisamos todas as suas abas, macros e f√≥rmulas matem√°ticas, transformando tudo em regras de backend s√≥lidas e em telas intuitivas. O resultado √© o fim da duplicidade de dados e o in√≠cio da automa√ß√£o corporativa.'
+    p_1: 'Planilhas que circulam por e-mail, fÛrmulas quebradas por erro humano e falta de auditoria de quem modificou os dados geram riscos financeiros enormes. O Excel n„o foi feito para ser o ERP da sua empresa.',
+    h2_2: 'A transformaÁ„o',
+    p_2: 'Analisamos todas as suas abas, macros e fÛrmulas matem·ticas, transformando tudo em regras de backend sÛlidas e em telas intuitivas. O resultado È o fim da duplicidade de dados e o inÌcio da automaÁ„o corporativa.'
   },
   {
     slug: 'migracao-banco-dados',
-    title: 'Migra√ß√£o de Banco de Dados',
-    description: 'Extra√ß√£o, transforma√ß√£o, limpeza e migra√ß√£o (ETL) de bancos de dados antigos ou legados para ambientes em nuvem, garantindo 100% de integridade das suas informa√ß√µes hist√≥ricas.',
+    title: 'MigraÁ„o de Banco de Dados',
+    description: 'ExtraÁ„o, transformaÁ„o, limpeza e migraÁ„o (ETL) de bancos de dados antigos ou legados para ambientes em nuvem, garantindo 100% de integridade das suas informaÁıes histÛricas.',
     h2_1: 'Protegendo o seu maior ativo',
-    p_1: 'Migrar dados n√£o √© apenas copiar arquivos. √â garantir que d√©cadas de informa√ß√µes de clientes, vendas e faturamento sejam convertidos perfeitamente para as novas estruturas de banco de dados sem qualquer diverg√™ncia.',
+    p_1: 'Migrar dados n„o È apenas copiar arquivos. … garantir que dÈcadas de informaÁıes de clientes, vendas e faturamento sejam convertidos perfeitamente para as novas estruturas de banco de dados sem qualquer divergÍncia.',
     h2_2: 'Processo Validador',
-    p_2: 'Utilizamos um processo cont√≠nuo de Profile, Cleanse, Transform, Migrate e Reconcile, gerando relat√≥rios de reconcilia√ß√£o para que voc√™ tenha a prova matem√°tica de que nada foi perdido na transi√ß√£o.'
+    p_2: 'Utilizamos um processo contÌnuo de Profile, Cleanse, Transform, Migrate e Reconcile, gerando relatÛrios de reconciliaÁ„o para que vocÍ tenha a prova matem·tica de que nada foi perdido na transiÁ„o.'
   },
   {
     slug: 'engenharia-reversa-software',
     title: 'Engenharia Reversa de Software',
-    description: 'Compreenda, recupere e documente o funcionamento exato de sistemas antigos ou de terceiros atrav√©s de nossa metodologia de descoberta reversa, essencial para auditoria ou reconstru√ß√£o.',
+    description: 'Compreenda, recupere e documente o funcionamento exato de sistemas antigos ou de terceiros atravÈs de nossa metodologia de descoberta reversa, essencial para auditoria ou reconstruÁ„o.',
     h2_1: 'Recuperando o Conhecimento',
-    p_1: 'Ao longo dos anos, os profissionais que constru√≠ram seu software saem da empresa e levam o conhecimento. Nossa Engenharia Reversa redescobre essas l√≥gicas e gera o "Legacy Blueprint" definitivo da sua aplica√ß√£o.',
+    p_1: 'Ao longo dos anos, os profissionais que construÌram seu software saem da empresa e levam o conhecimento. Nossa Engenharia Reversa redescobre essas lÛgicas e gera o "Legacy Blueprint" definitivo da sua aplicaÁ„o.',
     h2_2: 'Abordagem Multidirecional',
-    p_2: 'Investigamos telas, tabelas no banco de dados, pacotes de rede e manuais antigos para documentar regras de neg√≥cio que estavam ocultas. S√≥ reconstru√≠mos depois que dominamos as regras.'
+    p_2: 'Investigamos telas, tabelas no banco de dados, pacotes de rede e manuais antigos para documentar regras de negÛcio que estavam ocultas. SÛ reconstruÌmos depois que dominamos as regras.'
   },
   {
     slug: 'consultoria-sistemas',
     title: 'Consultoria de Sistemas e Arquitetura',
-    description: 'Desenhamos a estrat√©gia tecnol√≥gica certa para a sua moderniza√ß√£o. Avaliamos processos, integra√ß√µes, APIs, dados e definimos a melhor arquitetura de transi√ß√£o para sua empresa.',
-    h2_1: 'Planejamento Estrat√©gico em TI',
-    p_1: 'Modernizar um software central √© arriscado. Nossos especialistas mapeiam a arquitetura atual e prop√µem roteiros vi√°veis de moderniza√ß√£o progressiva, com o menor impacto poss√≠vel na opera√ß√£o.',
-    h2_2: 'Desenho de Solu√ß√µes',
-    p_2: 'Entregamos diagramas de arquitetura (Target Architecture), mapas de depend√™ncia t√©cnica e um cronograma de migra√ß√£o passo a passo desenhado especificamente para a realidade do seu fluxo de caixa e risco.'
+    description: 'Desenhamos a estratÈgia tecnolÛgica certa para a sua modernizaÁ„o. Avaliamos processos, integraÁıes, APIs, dados e definimos a melhor arquitetura de transiÁ„o para sua empresa.',
+    h2_1: 'Planejamento EstratÈgico em TI',
+    p_1: 'Modernizar um software central È arriscado. Nossos especialistas mapeiam a arquitetura atual e propıem roteiros vi·veis de modernizaÁ„o progressiva, com o menor impacto possÌvel na operaÁ„o.',
+    h2_2: 'Desenho de SoluÁıes',
+    p_2: 'Entregamos diagramas de arquitetura (Target Architecture), mapas de dependÍncia tÈcnica e um cronograma de migraÁ„o passo a passo desenhado especificamente para a realidade do seu fluxo de caixa e risco.'
   },
   {
     slug: 'desenvolvimento-software',
     title: 'Desenvolvimento de Software Sob Medida',
-    description: 'Ap√≥s compreendermos as regras e o passado da sua opera√ß√£o, constru√≠mos aplica√ß√µes web e sistemas sob medida com arquitetura escal√°vel e alta seguran√ßa para o seu futuro.',
+    description: 'ApÛs compreendermos as regras e o passado da sua operaÁ„o, construÌmos aplicaÁıes web e sistemas sob medida com arquitetura escal·vel e alta seguranÁa para o seu futuro.',
     h2_1: 'Criando o seu novo sistema',
-    p_1: 'Diferente de f√°bricas de software tradicionais, n√≥s s√≥ iniciamos o desenvolvimento sob medida quando o diagn√≥stico e as regras legadas est√£o totalmente estabilizados.',
+    p_1: 'Diferente de f·bricas de software tradicionais, nÛs sÛ iniciamos o desenvolvimento sob medida quando o diagnÛstico e as regras legadas est„o totalmente estabilizados.',
     h2_2: 'Qualidade e Nuvem',
-    p_2: 'Utilizamos stacks modernas como Next.js, Node.js e PostgreSQL, hospedados em infraestruturas el√°sticas. Seu novo software ser√° r√°pido, seguro e nunca mais se tornar√° uma "caixa preta" sem documenta√ß√£o.'
+    p_2: 'Utilizamos stacks modernas como Next.js, Node.js e PostgreSQL, hospedados em infraestruturas el·sticas. Seu novo software ser· r·pido, seguro e nunca mais se tornar· uma "caixa preta" sem documentaÁ„o.'
   }
 ];
 
@@ -108,13 +108,13 @@ export default function SEOPage() {
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Qual √© o estado do seu sistema?</h2>
-          <p className="text-lg text-slate-600 mb-10">Fa√ßa gratuitamente uma avalia√ß√£o preliminar conosco em menos de 5 minutos e descubra seu n√≠vel de risco tecnol√≥gico.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Qual È o estado do seu sistema?</h2>
+          <p className="text-lg text-slate-600 mb-10">FaÁa gratuitamente uma avaliaÁ„o preliminar conosco em menos de 5 minutos e descubra seu nÌvel de risco tecnolÛgico.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/diagnostico" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-md flex items-center justify-center">
               ANALISAR MEU SISTEMA
             </Link>
-            <a href="https://wa.me/5561994005941" target="_blank" rel="noopener noreferrer" className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-sm flex items-center justify-center gap-2">
+            <a href="https://wa.me/5561992809250" target="_blank" rel="noopener noreferrer" className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-sm flex items-center justify-center gap-2">
               <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
               FALAR COM ESPECIALISTA
             </a>

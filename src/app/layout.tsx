@@ -61,7 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               "name": "Hands On!",
               "image": "https://handson-dun.vercel.app/og-image.jpg",
               "url": "https://handson-dun.vercel.app/",
-              "telephone": "+5561994005941",
+              "telephone": "+5561992809250",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Qd. 13 Lote 16 Lj. 01 Setor Leste",
