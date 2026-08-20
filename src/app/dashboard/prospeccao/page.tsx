@@ -101,78 +101,80 @@ export default function ProspeccaoPage() {
       </header>
 
       <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
-        <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4 items-end">
-          <div className="flex-grow w-full md:w-1/3">
-            <label className="block text-sm font-semibold text-black mb-1">Nicho / Setor</label>
-            <input 
-              type="text" 
-              value={niche}
-              onChange={e => setNiche(e.target.value)}
-              placeholder="Ex: Clínica Odontológica, Advocacia"
-              className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
-              required
-            />
+        <form onSubmit={handleSearch} className="flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row gap-4 items-end">
+            <div className="flex-grow w-full md:w-1/3">
+              <label className="block text-sm font-semibold text-black mb-1">Nicho / Setor</label>
+              <input 
+                type="text" 
+                value={niche}
+                onChange={e => setNiche(e.target.value)}
+                placeholder="Ex: Clínica Odontológica, Advocacia"
+                className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
+                required
+              />
+            </div>
+            <div className="flex-grow w-full md:w-1/4">
+              <label className="block text-sm font-semibold text-black mb-1">Estado</label>
+              <select
+                value={selectedState}
+                onChange={e => setSelectedState(e.target.value)}
+                className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
+                required
+              >
+                <option value="">Selecione...</option>
+                {states.map(uf => (
+                  <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex-grow w-full md:w-1/3">
+              <label className="block text-sm font-semibold text-black mb-1">Cidade / Região</label>
+              <select
+                value={city}
+                onChange={e => setCity(e.target.value)}
+                className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
+                required
+                disabled={!selectedState}
+              >
+                <option value="">Selecione...</option>
+                {cities.map(c => (
+                  <option key={c.id} value={c.nome}>{c.nome}</option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div className="flex-grow w-full md:w-1/4">
-            <label className="block text-sm font-semibold text-black mb-1">Estado</label>
-            <select
-              value={selectedState}
-              onChange={e => setSelectedState(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
-              required
+          
+          <div className="flex flex-col md:flex-row gap-4 items-end">
+            <div className="flex-grow w-full md:w-2/3">
+              <label className="block text-sm font-semibold text-black mb-1">Filtro de Canais (Exibir somente)</label>
+              <select
+                value={filterType}
+                onChange={(e) => setFilterType(e.target.value)}
+                className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
+              >
+                <option value="ALL">Todos os resultados</option>
+                <option value="NO_SITE">Negócio sem site próprio</option>
+                <option value="INSTAGRAM">Instagram</option>
+                <option value="WHATSAPP">WhatsApp</option>
+                <option value="SOCIAL_OTHER">Outras Redes Sociais</option>
+                <option value="WEBSITE">Site Próprio (URLs normais)</option>
+              </select>
+            </div>
+            <button 
+              type="submit" 
+              disabled={loading || !city}
+              className="w-full md:w-1/3 bg-blue-600 text-white px-8 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-50 h-[42px] flex items-center justify-center"
             >
-              <option value="">Selecione...</option>
-              {states.map(uf => (
-                <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
-              ))}
-            </select>
+              {loading ? 'Buscando...' : 'Prospectar'}
+            </button>
           </div>
-          <div className="flex-grow w-full md:w-1/3">
-            <label className="block text-sm font-semibold text-black mb-1">Cidade / Região</label>
-            <select
-              value={city}
-              onChange={e => setCity(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
-              required
-              disabled={!selectedState}
-            >
-              <option value="">Selecione...</option>
-              {cities.map(c => (
-                <option key={c.id} value={c.nome}>{c.nome}</option>
-              ))}
-            </select>
-          </div>
-          <button 
-            type="submit" 
-            disabled={loading || !city}
-            className="w-full md:w-auto bg-blue-600 text-white px-8 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-50 h-[42px] flex items-center justify-center min-w-[140px]"
-          >
-            {loading ? 'Buscando...' : 'Prospectar'}
-          </button>
         </form>
       </div>
 
       {error && (
         <div className="bg-red-50 text-red-700 p-4 rounded-lg mb-6 border border-red-200">
           {error}
-        </div>
-      )}
-
-      {results.length > 0 && (
-        <div className="mb-6 bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center gap-3">
-          <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Filtrar resultados:</label>
-          <select
-            value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
-            className="w-full sm:w-auto border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
-          >
-            <option value="ALL">Todos os resultados</option>
-            <option value="NO_SITE">Negócio sem site próprio</option>
-            <option value="INSTAGRAM">Instagram</option>
-            <option value="WHATSAPP">WhatsApp</option>
-            <option value="SOCIAL_OTHER">Outras Redes Sociais</option>
-            <option value="WEBSITE">Site Próprio (URLs normais)</option>
-          </select>
         </div>
       )}
 
