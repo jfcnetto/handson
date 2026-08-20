@@ -17,6 +17,7 @@ export default function ProspeccaoPage() {
   const [results, setResults] = useState<ProspectResult[]>([])
   const [error, setError] = useState('')
   const [adding, setAdding] = useState<string | null>(null)
+  const [addedProspects, setAddedProspects] = useState<string[]>([])
 
   useEffect(() => {
     fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
@@ -75,6 +76,7 @@ export default function ProspeccaoPage() {
     
     if (res.success) {
       alert(`✅ ${prospect.name} adicionado ao Kanban com sucesso!`)
+      setAddedProspects(prev => [...prev, prospect.name])
     } else {
       alert(`❌ Erro ao adicionar: ${res.error}`)
     }
@@ -202,11 +204,16 @@ export default function ProspeccaoPage() {
               <div className="flex-shrink-0">
                 <button 
                   onClick={() => handleAddToFunnel(prospect)}
-                  disabled={adding === prospect.name}
-                  className="bg-slate-900 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-slate-800 transition disabled:opacity-50 flex items-center gap-2 shadow-sm"
+                  disabled={adding === prospect.name || addedProspects.includes(prospect.name)}
+                  className={`px-5 py-2 rounded-lg font-semibold text-sm transition shadow-sm flex items-center gap-2 ${addedProspects.includes(prospect.name) ? 'bg-green-600 text-white cursor-not-allowed opacity-80' : 'bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-50'}`}
                 >
                   {adding === prospect.name ? (
                     'Adicionando...'
+                  ) : addedProspects.includes(prospect.name) ? (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      Adicionado
+                    </>
                   ) : (
                     <>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
