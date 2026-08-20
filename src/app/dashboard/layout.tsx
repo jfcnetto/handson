@@ -69,6 +69,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   const navItems = [
     { name: 'Leads', href: '/dashboard' },
+    { name: 'Prospecção', href: '/dashboard/prospeccao' },
     ...(userProfile.role === 'ADMIN' ? [
       { name: 'Finanças', href: '/dashboard/financas' },
       { name: 'Usuários', href: '/dashboard/usuarios' },

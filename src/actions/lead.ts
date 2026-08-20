@@ -123,3 +123,38 @@ export async function updateLeadDocument(leadId: string, document: string) {
     return { success: false, error: "Erro ao atualizar documento do lead." }
   }
 }
+export async function deleteLead(leadId: string) {
+  try {
+    // Delete related transactions first if any
+    await prisma.transaction.deleteMany({
+      where: { leadId }
+    })
+    
+    await prisma.lead.delete({
+      where: { id: leadId }
+    })
+    revalidatePath('/dashboard')
+    return { success: true }
+  } catch (err) {
+    console.error("Error deleting lead:", err)
+    return { success: false, error: "Erro ao excluir o lead." }
+  }
+}
+
+export async function updateLeadBasicInfo(leadId: string, name: string, phone: string, company: string, document?: string) {
+  try {
+    const dataToUpdate: any = { name, phone, company }
+    if (document !== undefined) {
+      dataToUpdate.document = document
+    }
+    const updated = await prisma.lead.update({
+      where: { id: leadId },
+      data: dataToUpdate
+    })
+    revalidatePath('/dashboard')
+    return { success: true, lead: updated }
+  } catch (err) {
+    console.error("Error updating lead info:", err)
+    return { success: false, error: "Erro ao atualizar informações do lead." }
+  }
+}

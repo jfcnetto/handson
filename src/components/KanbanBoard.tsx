@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { updateLeadStatus, updateLeadDocument } from '@/actions/lead'
+import Link from 'next/link'
+import { updateLeadStatus, updateLeadDocument, deleteLead, updateLeadBasicInfo } from '@/actions/lead'
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Table, TableRow, TableCell, BorderStyle, WidthType, ImageRun, SectionType } from 'docx'
 import { saveAs } from 'file-saver'
 
@@ -19,7 +20,14 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
   const [leads, setLeads] = useState(initialLeads)
   const [updating, setUpdating] = useState<string | null>(null)
   const [selectedLead, setSelectedLead] = useState<any | null>(null)
+  const [showEmailModal, setShowEmailModal] = useState(false)
   const [docValue, setDocValue] = useState('')
+
+  // Edição Básica
+  const [isEditingInfo, setIsEditingInfo] = useState(false)
+  const [editCompany, setEditCompany] = useState('')
+  const [editName, setEditName] = useState('')
+  const [editPhone, setEditPhone] = useState('')
 
   useEffect(() => {
     setLeads(initialLeads)
@@ -28,6 +36,10 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
   useEffect(() => {
     if (selectedLead) {
       setDocValue(selectedLead.document ? formatDocument(selectedLead.document) : '')
+      setEditCompany(selectedLead.company || '')
+      setEditName(selectedLead.name || '')
+      setEditPhone(selectedLead.phone || '')
+      setIsEditingInfo(false)
     }
   }, [selectedLead])
 
@@ -50,16 +62,64 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
 
   const handleSaveDocument = async () => {
     if (!selectedLead) return
+    
     setUpdating(selectedLead.id)
     const res = await updateLeadDocument(selectedLead.id, docValue)
-    if (res.success) {
-      setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, document: docValue } : l))
-      setSelectedLead({ ...selectedLead, document: docValue })
+    if (res.success && res.lead) {
+      setLeads(leads.map(l => l.id === selectedLead.id ? { ...l, document: res.lead?.document } : l))
+      setSelectedLead({ ...selectedLead, document: res.lead.document })
       alert("Documento salvo com sucesso!")
     } else {
       alert("Erro ao salvar documento: " + (res.error || "Erro desconhecido"))
     }
     setUpdating(null)
+  }
+
+  const handleSaveBasicInfo = async () => {
+    if (!selectedLead) return
+    setUpdating(selectedLead.id)
+    const res = await updateLeadBasicInfo(selectedLead.id, editName, editPhone, editCompany, docValue)
+    if (res.success && res.lead) {
+      setLeads(leads.map(l => l.id === selectedLead.id ? { ...l, name: editName, phone: editPhone, company: editCompany, document: docValue } : l))
+      setSelectedLead({ ...selectedLead, name: editName, phone: editPhone, company: editCompany, document: docValue })
+      setIsEditingInfo(false)
+    } else {
+      alert(res.error)
+    }
+    setUpdating(null)
+  }
+
+  const handleSendBotMessage = async () => {
+    if (!selectedLead || !selectedLead.phone) {
+      alert("Lead não possui telefone válido para envio.")
+      return
+    }
+    
+    // Texto padrão de prospecção/acompanhamento
+    const text = `Olá ${selectedLead.name}, tudo bem? Aqui é da equipe da Hands On! Vimos que você realizou nosso diagnóstico sobre o sistema ${selectedLead.targetSystem || 'legado'} da ${selectedLead.company || 'sua empresa'}. Gostaria de agendar um papo rápido para entendermos melhor o seu cenário?`;
+
+    try {
+      const response = await fetch('http://localhost:3001/send-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          to: selectedLead.phone,
+          text: text
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("✅ Mensagem enfileirada no Bot com sucesso!\n\nPosição na fila: " + data.positionInQueue);
+      } else {
+        alert("❌ Erro retornado pelo Bot: " + (data.error || "Erro desconhecido"));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("❌ Falha de comunicação com o Bot.\nVerifique se o microserviço está rodando em http://localhost:3001");
+    }
   }
 
   const handleGenerateProposal = async () => {
@@ -347,6 +407,21 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
     saveAs(blob, `Proposta_${selectedLead.company?.replace(/\s+/g, '_') || 'Comercial'}.docx`)
   }
 
+  const handleDeleteLead = async () => {
+    if (!selectedLead) return
+    if (!confirm('Tem certeza que deseja excluir este lead? Essa ação não pode ser desfeita.')) return
+    
+    setUpdating('all')
+    const res = await deleteLead(selectedLead.id)
+    if (res.success) {
+      setLeads(leads.filter(l => l.id !== selectedLead.id))
+      setSelectedLead(null)
+    } else {
+      alert(res.error)
+    }
+    setUpdating(null)
+  }
+
   const handleStatusChange = async (leadId: string, newStatus: string) => {
     setUpdating(leadId)
     // Optimistic UI update
@@ -360,6 +435,9 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
     }
     setUpdating(null)
   }
+
+  const premiumEmailSubject = selectedLead ? `Oportunidade de melhoria no site da ${selectedLead.company || 'sua empresa'}` : '';
+  const premiumEmailBody = selectedLead ? `Olá, equipe da ${selectedLead.company || 'sua empresa'}! Tudo bem?\n\nConheci o trabalho da clínica e percebi que vocês construíram uma excelente reputação no Google. Parabéns pela qualidade do atendimento e pela confiança conquistada junto aos pacientes!\n\nAo analisar a presença digital da ${selectedLead.company || 'sua empresa'}, identifiquei uma oportunidade de modernizar o site e torná-lo mais preparado para celulares, facilitando o contato e o agendamento pelo WhatsApp.\n\nAtualmente, grande parte dos pacientes pesquisa e agenda consultas pelo celular. Quando o site demora, dificulta a navegação ou não direciona rapidamente para o atendimento, a clínica pode perder potenciais pacientes — mesmo oferecendo um serviço de excelência.\n\nA Hands On é especializada em modernização de canais digitais. Mais do que criar sites visualmente atraentes, desenvolvemos estruturas rápidas e estratégicas, pensadas para transmitir confiança e transformar visitantes em novos contatos pelo WhatsApp.\n\nGostaríamos de preparar e apresentar, sem compromisso, uma proposta visual de novo site para a ${selectedLead.company || 'sua empresa'}, com uma estrutura moderna e direcionada à conversão de novos pacientes.\n\nPodemos enviar essa demonstração para sua avaliação?\n\nAtenciosamente,\n\nEquipe Hands On` : '';
 
   return (
     <>
@@ -435,17 +513,54 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
             
             {/* Header */}
-            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">{selectedLead.company}</h2>
-                <p className="text-sm text-slate-500">{selectedLead.name} - {selectedLead.jobTitle}</p>
+            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-start bg-slate-50">
+              <div className="flex-grow pr-4">
+                {isEditingInfo ? (
+                  <div className="flex gap-2 items-center mb-2">
+                    <input type="text" value={editCompany} onChange={e => setEditCompany(e.target.value)} className="font-bold text-xl px-2 py-1 border rounded" placeholder="Empresa" />
+                  </div>
+                ) : (
+                  <h2 className="text-xl font-bold text-slate-900">{selectedLead.company}</h2>
+                )}
+                
+                {isEditingInfo ? (
+                  <div className="flex gap-2 items-center">
+                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} className="text-sm px-2 py-1 border rounded text-slate-900" placeholder="Nome" />
+                    <span className="text-sm text-slate-500">- {selectedLead.jobTitle}</span>
+                  </div>
+                ) : (
+                  <p className="text-sm text-slate-500">{selectedLead.name} - {selectedLead.jobTitle}</p>
+                )}
               </div>
-              <button 
-                onClick={() => setSelectedLead(null)}
-                className="text-slate-400 hover:text-slate-700 transition p-2 hover:bg-slate-200 rounded-full"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              </button>
+              <div className="flex gap-2 flex-shrink-0">
+                {isEditingInfo ? (
+                  <>
+                    <button onClick={handleSaveBasicInfo} disabled={updating === selectedLead.id} className="px-3 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 transition">Salvar</button>
+                    <button onClick={() => setIsEditingInfo(false)} className="px-3 py-2 text-sm font-semibold text-slate-600 bg-slate-200 rounded-lg hover:bg-slate-300 transition">Cancelar</button>
+                  </>
+                ) : (
+                  <button onClick={() => setIsEditingInfo(true)} className="px-3 py-2 text-sm font-semibold text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 transition">Editar</button>
+                )}
+                <button
+                  onClick={handleDeleteLead}
+                  disabled={updating === 'all'}
+                  className="px-4 py-2 text-sm font-semibold text-red-600 border border-red-200 rounded-lg hover:bg-red-50 disabled:opacity-50 transition"
+                >
+                  Excluir Lead
+                </button>
+                <button
+                  onClick={() => setSelectedLead(null)}
+                  className="px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition"
+                >
+                  Fechar
+                </button>
+                <button 
+                  onClick={() => setSelectedLead(null)}
+                  className="text-slate-400 hover:text-slate-700 transition p-2 hover:bg-slate-200 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </div>
             </div>
 
             {/* Body */}
@@ -457,26 +572,28 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Contato</h3>
                     <div className="space-y-3 text-sm text-slate-700">
                       <p><strong className="text-slate-900">E-mail:</strong> {selectedLead.email}</p>
-                      <p><strong className="text-slate-900">Telefone:</strong> {selectedLead.phone}</p>
+                      {isEditingInfo ? (
+                        <div className="flex items-center gap-2">
+                          <strong className="text-slate-900">Telefone:</strong>
+                          <input type="text" value={editPhone} onChange={e => setEditPhone(e.target.value)} className="border px-2 py-1 rounded text-sm flex-grow text-slate-900" placeholder="Telefone" />
+                        </div>
+                      ) : (
+                        <p><strong className="text-slate-900">Telefone:</strong> {selectedLead.phone}</p>
+                      )}
                       <p><strong className="text-slate-900">Tamanho da Empresa:</strong> {selectedLead.companySize}</p>
                       <div className="flex flex-col gap-1">
                         <strong className="text-slate-900">CPF/CNPJ:</strong>
-                        <div className="flex gap-2">
+                        {isEditingInfo ? (
                           <input 
                             type="text" 
-                            className="border border-slate-200 rounded px-2 py-1 flex-grow focus:outline-none focus:border-blue-400 text-sm"
+                            className="border border-slate-200 rounded px-2 py-1 focus:outline-none focus:border-blue-400 text-sm w-full text-slate-900"
                             value={docValue}
                             onChange={(e) => setDocValue(formatDocument(e.target.value))}
                             placeholder="000.000.000-00 ou 00.000.000/0000-00"
                           />
-                          <button 
-                            onClick={handleSaveDocument}
-                            disabled={updating === selectedLead.id || docValue === selectedLead.document}
-                            className="bg-slate-800 text-white px-3 py-1 rounded text-xs font-medium disabled:opacity-50 hover:bg-slate-700 transition"
-                          >
-                            Salvar
-                          </button>
-                        </div>
+                        ) : (
+                          <p>{selectedLead.document || 'Não informado'}</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -484,7 +601,15 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
                   <div>
                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Tecnologia</h3>
                     <div className="space-y-2 text-sm text-slate-700">
-                      <p><strong className="text-slate-900">Sistema Alvo:</strong> {selectedLead.targetSystem}</p>
+                      <p><strong className="text-slate-900">Sistema Alvo:</strong> {
+                        selectedLead.targetSystem?.startsWith('http') ? (
+                          <a href={selectedLead.targetSystem} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
+                            {selectedLead.targetSystem}
+                          </a>
+                        ) : (
+                          selectedLead.targetSystem
+                        )
+                      }</p>
                       <p><strong className="text-slate-900">Tech Stack:</strong> {selectedLead.technology}</p>
                       <p><strong className="text-slate-900">Banco de Dados:</strong> {selectedLead.database}</p>
                       <p><strong className="text-slate-900">Possui Código-fonte:</strong> {selectedLead.hasSourceCode}</p>
@@ -553,34 +678,114 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
             {/* Footer / Actions */}
             <div className="px-6 py-4 border-t border-slate-100 bg-white flex justify-between items-center gap-3">
               <div>
-                <button 
-                  onClick={handleGenerateProposal}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition shadow-sm"
+                <Link 
+                  href={`/dashboard/contrato/${selectedLead.id}`}
+                  target="_blank"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition shadow-sm mb-2"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-                  Gerar Proposta (DOCX)
+                  Gerar Contrato (PDF)
+                </Link>
+                <button 
+                  onClick={() => setShowEmailModal(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold text-sm hover:bg-purple-700 transition shadow-sm"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+                  Gerar E-mail Premium
                 </button>
               </div>
               <div className="flex gap-3">
+              <button
+                onClick={handleSendBotMessage}
+                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold text-sm hover:bg-indigo-700 transition shadow-sm"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                Disparar Bot
+              </button>
               <a 
                 href={`mailto:${selectedLead.email}`}
                 className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-200 transition"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                Enviar E-mail
+                E-mail
               </a>
               <a 
-                href={`https://wa.me/${selectedLead.phone?.replace(/\D/g, '') || ''}`}
+                href={`https://wa.me/${selectedLead.phone?.replace(/\D/g, '') || ''}?text=${encodeURIComponent(premiumEmailBody)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg font-semibold text-sm hover:bg-emerald-600 transition shadow-sm"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                WhatsApp
+                WhatsApp Manual
               </a>
             </div>
           </div>
         </div>
+        </div>
+      )}
+
+      {/* Email Premium Modal */}
+      {showEmailModal && selectedLead && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-600"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+                Template E-mail Outbound
+              </h2>
+              <button onClick={() => setShowEmailModal(false)} className="text-slate-400 hover:text-slate-700 transition p-2 hover:bg-slate-200 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto flex-grow bg-slate-50/50">
+              <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm">
+                <p className="text-sm text-slate-500 mb-2"><strong>Assunto sugerido:</strong></p>
+                <div className="bg-slate-100 p-3 rounded font-medium text-slate-800 mb-6 flex justify-between items-center">
+                  {premiumEmailSubject}
+                  <button onClick={() => navigator.clipboard.writeText(premiumEmailSubject)} className="text-purple-600 hover:text-purple-800 text-xs font-bold">COPIAR</button>
+                </div>
+
+                <p className="text-sm text-slate-500 mb-2"><strong>Corpo do E-mail (HTML Formatado):</strong></p>
+                <div className="bg-slate-100 p-4 rounded text-sm text-slate-700 whitespace-pre-wrap font-sans relative group">
+                  <button 
+                    onClick={() => navigator.clipboard.writeText(premiumEmailBody)} 
+                    className="absolute top-2 right-2 bg-white px-2 py-1 rounded shadow text-purple-600 hover:text-purple-800 text-xs font-bold opacity-0 group-hover:opacity-100 transition"
+                  >
+                    COPIAR TEXTO
+                  </button>
+                  <div className="space-y-4">
+                    {premiumEmailBody.split('\n').map((line, idx) => (
+                      <p key={idx}>{line}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="px-6 py-4 border-t border-slate-100 bg-white flex justify-end gap-3">
+              <div className="flex gap-3">
+                <a 
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${selectedLead.email}&su=${encodeURIComponent(premiumEmailSubject)}&body=${encodeURIComponent(premiumEmailBody)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-6 py-2 bg-red-500 text-white rounded-lg font-bold text-sm hover:bg-red-600 transition shadow-sm flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+                  Abrir Rascunho no Gmail
+                </a>
+                <a 
+                  href={`https://wa.me/${selectedLead.phone?.replace(/\D/g, '') || ''}?text=${encodeURIComponent(premiumEmailBody)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-6 py-2 bg-emerald-500 text-white rounded-lg font-bold text-sm hover:bg-emerald-600 transition shadow-sm flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Enviar Rascunho no WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </>
