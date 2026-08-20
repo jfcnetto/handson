@@ -55,3 +55,31 @@ export async function listUsers() {
     return { success: false, error: "Erro ao listar usuários." }
   }
 }
+
+export async function deleteUser(id: string) {
+  try {
+    await prisma.user.delete({
+      where: { id }
+    })
+    return { success: true }
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    return { success: false, error: "Erro ao excluir usuário." }
+  }
+}
+
+export async function updateUser(id: string, data: { name: string, role: string }) {
+  try {
+    const user = await prisma.user.update({
+      where: { id },
+      data: {
+        name: data.name,
+        role: data.role
+      }
+    })
+    return { success: true, user }
+  } catch (err) {
+    console.error("Error updating user:", err);
+    return { success: false, error: "Erro ao atualizar usuário." }
+  }
+}
