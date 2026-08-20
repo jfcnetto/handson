@@ -2,13 +2,7 @@
 
 import prisma from '@/lib/prisma'
 
-// Regras de Classificação (RN10)
-function getCategory(score: number) {
-  if (score > 80) return 'A' // Quente
-  if (score >= 50) return 'B' // Morno
-  return 'C' // Frio
-}
-
+// Regras de Classificação (RN10) - Removido (Não usado no novo modelo)
 // Motor de Pontuação (RN05 a RN08)
 function calculateScore(jobTitle: string, companySize: string | null, manualEngagement: number = 0) {
   let score = 0 // RN05: Inicia com 0
@@ -60,7 +54,6 @@ export async function createLead(formData: FormData) {
   }
 
   const score = calculateScore(jobTitle, companySize)
-  const category = getCategory(score)
 
   try {
     const lead = await prisma.lead.create({
@@ -70,8 +63,7 @@ export async function createLead(formData: FormData) {
         company,
         companySize,
         jobTitle,
-        score,
-        category,
+        leadIntentScore: score,
       }
     })
     return { success: true, lead }
@@ -87,15 +79,13 @@ export async function addEngagement(leadId: string, points: number) {
   
   if (!lead) return { error: 'Lead não encontrado.' }
 
-  const newScore = lead.score + points
-  const newCategory = getCategory(newScore)
+  const newScore = lead.leadIntentScore + points
 
   try {
     const updatedLead = await prisma.lead.update({
       where: { id: leadId },
       data: {
-        score: newScore,
-        category: newCategory
+        leadIntentScore: newScore,
       }
     })
     return { success: true, lead: updatedLead }
