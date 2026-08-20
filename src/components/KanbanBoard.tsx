@@ -442,12 +442,12 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
 
   return (
     <>
-      <div className="flex overflow-x-auto pb-8 gap-4 min-h-[600px]">
+      <div className="flex overflow-x-auto pb-8 gap-4 min-h-[600px] w-full snap-x">
         {FUNNEL_STAGES.map(stage => {
           const stageLeads = leads.filter(l => l.status === stage.id)
           
           return (
-            <div key={stage.id} className="min-w-[300px] w-[300px] bg-slate-100/50 rounded-lg p-4 flex flex-col gap-3">
+            <div key={stage.id} className="min-w-[300px] w-[300px] bg-slate-100/50 rounded-lg p-4 flex flex-col gap-3 snap-center">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-bold text-slate-700 text-sm">{stage.title}</h3>
                 <span className="bg-white text-slate-500 text-xs px-2 py-1 rounded-full shadow-sm">{stageLeads.length}</span>
