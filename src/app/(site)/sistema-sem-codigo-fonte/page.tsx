@@ -1,26 +1,64 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Substituição de Sistema Sem Código-Fonte | Hands On! Modernização',
-  description: 'Possui um sistema crítico funcionando mas a sua empresa perdeu o acesso ao código-fonte? Nós reconstruímos a sua aplicação através de Engenharia Reversa, analisando o banco de dados e o comportamento em tela.'
+  title: 'Como Recuperar um Sistema Sem Código-Fonte',
+  description: 'Sua empresa perdeu o código-fonte original do sistema? Saiba como a Hands On! pode auditar, recuperar e reescrever sua aplicação para garantir a operação.',
 }
 
-export default function SEOPage() {
+export default function SistemaSemCodigoFontePage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Substituição de Sistema Sem Código-Fonte</h1>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed" dangerouslySetInnerHTML={{ __html: 'Possui um sistema crítico funcionando mas a sua empresa perdeu o acesso ao código-fonte?<br/><br/>Nós reconstruímos a sua aplicação através de Engenharia Reversa, analisando o banco de dados e o comportamento em tela.' }} />
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Como Manter e Evoluir um Sistema Sem Código-Fonte</h1>
         
-        <div className="prose prose-lg text-slate-700 max-w-none">
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">O risco de depender do que você não controla</h2>
-          <p className="mb-8" dangerouslySetInnerHTML={{ __html: 'Um sistema sem código-fonte é uma bomba-relógio.<br/><br/>Qualquer mudança de infraestrutura, atualização de sistema operacional ou problema de segurança pode paralisar sua operação de forma irreversível.' }} />
-          
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Como recuperamos seu sistema</h2>
-          <p className="mb-12" dangerouslySetInnerHTML={{ __html: 'Utilizamos técnicas avançadas de Engenharia Reversa.<br/><br/>Analisamos a estrutura do banco de dados existente, rastreamos o tráfego de rede e mapeamos a interface visual para extrair de volta as regras de negócio perdidas e reconstruir um novo software idêntico e moderno.' }} />
-        </div>
-      </div>
-      
+        <img 
+          src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=1200&q=80" 
+          alt="Programador frustrado tentando entender um sistema fechado" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+        />
+
+        <p>
+          Um dos maiores pesadelos para qualquer gestor de TI é descobrir que o sistema principal da empresa está rodando, mas o <strong>código-fonte original foi perdido</strong>. Seja porque o desenvolvedor saiu da empresa, a software house terceirizada faliu ou simplesmente porque não houve controle de versão (como Git) ao longo dos anos.
+        </p>
+
+        <h2>O Risco de Operar Sem Código-Fonte</h2>
+        <p>
+          O código-fonte é a "receita do bolo" de um software. Sem ele, você possui apenas o bolo já assado (o executável final). Operar dessa maneira traz riscos críticos:
+        </p>
+        <ul>
+          <li><strong>Impossibilidade de Manutenção:</strong> Se uma nova lei tributária exigir uma mudança no cálculo de impostos do sistema, você não consegue alterá-lo.</li>
+          <li><strong>Falhas de Compatibilidade:</strong> Uma simples atualização do Windows ou de um servidor pode fazer o executável parar de funcionar permanentemente.</li>
+          <li><strong>Gargalo de Crescimento:</strong> Não é possível adicionar novas telas, integrar com APIs modernas ou criar versões móveis.</li>
+        </ul>
+
+        <h2>Qual é a Solução?</h2>
+        <p>
+          A solução definitiva é recriar o sistema. No entanto, recriar um sistema complexo "do zero" contando apenas com a memória dos funcionários costuma resultar em fracasso, pois muitas regras de negócios ocultas acabam esquecidas.
+        </p>
+        
+        <img 
+          src="https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?auto=format&fit=crop&w=1200&q=80" 
+          alt="Recuperação de dados e planejamento de novo sistema" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        />
+
+        <h2>A Abordagem Técnica da Hands On!</h2>
+        <p>
+          Nós utilizamos técnicas de <strong>Engenharia Reversa</strong> focadas em observar a "Caixa Preta". Em vez de tentar descompilar executáveis antigos (o que raramente gera um código legível), nós:
+        </p>
+        <ol>
+          <li>Mapeamos o banco de dados existente (que geralmente continua acessível, como um SQL Server ou Firebird antigo).</li>
+          <li>Interceptamos todas as consultas que o sistema fechado faz ao banco de dados durante a operação normal dos usuários.</li>
+          <li>Catalogamos cada tela e comportamento visual para desenhar processos equivalentes.</li>
+          <li>Desenvolvemos, em paralelo, uma aplicação web moderna (utilizando tecnologias como React e Node.js) que se comunica com os mesmos dados.</li>
+        </p>
+
+        <h2>Recupere a Propriedade Intelectual da sua Empresa</h2>
+        <p>
+          Mais do que apenas um novo software, o processo devolve à sua empresa a posse da própria tecnologia. Ao final da reconstrução, você recebe o sistema moderno completo, documentado e com repositório de código-fonte devidamente versionado sob sua propriedade exclusiva, garantindo que o pesadelo nunca se repita.
+        </p>
+      </article>
+
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">

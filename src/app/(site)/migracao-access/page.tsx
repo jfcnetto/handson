@@ -1,26 +1,63 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Migração de Access para Aplicação Web | Hands On! Modernização',
-  description: 'Bancos de dados e sistemas construídos em Microsoft Access costumam travar, corromper dados e impedir o acesso remoto. A Hands On! migra sua operação Access para uma aplicação web moderna e segura na nuvem.'
+  title: 'Migração de Access para Web: Como Modernizar seu Banco de Dados',
+  description: 'Sistemas Microsoft Access atingiram o limite? Saiba como migrar dados, telas e formulários legados em Access para a nuvem de forma escalável e livre de travamentos.',
 }
 
-export default function SEOPage() {
+export default function MigracaoAccessPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Access para Aplicação Web</h1>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed" dangerouslySetInnerHTML={{ __html: 'Bancos de dados e sistemas construídos em Microsoft Access costumam travar, corromper dados e impedir o acesso remoto.<br/><br/>A Hands On! migra sua operação Access para uma aplicação web moderna e segura na nuvem.' }} />
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Microsoft Access para Sistemas Web Modernos</h1>
         
-        <div className="prose prose-lg text-slate-700 max-w-none">
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">O limite do Microsoft Access</h2>
-          <p className="mb-8" dangerouslySetInnerHTML={{ __html: 'O Access é excelente para pequenos controles, mas quando seu negócio cresce, os arquivos tornam-se lentos e corrompem facilmente com múltiplos acessos simultâneos.' }} />
-          
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Solução Web</h2>
-          <p className="mb-12" dangerouslySetInnerHTML={{ __html: 'Migramos seu banco de dados para SQL Server ou PostgreSQL e transformamos seus formulários e relatórios em um sistema Web seguro, acessível de qualquer dispositivo e preparado para múltiplos usuários reais.' }} />
-        </div>
-      </div>
-      
+        <img 
+          src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80" 
+          alt="Servidor de banco de dados corporativo" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+        />
+
+        <p>
+          O <strong>Microsoft Access</strong> foi uma das ferramentas de banco de dados mais populares das décadas passadas. Ele permitiu que milhares de empresas automatizassem fluxos internos rapidamente. Contudo, negócios crescem e o Access não foi desenhado para lidar com cenários de grande volume de dados ou múltiplos acessos simultâneos.
+        </p>
+
+        <h2>Os Limites Fatais do Access</h2>
+        <p>
+          Quando a sua operação de negócios começa a depender inteiramente de um banco de dados Access (`.mdb` ou `.accdb`), alguns problemas clássicos começam a paralisar o trabalho da sua equipe:
+        </p>
+        <ul>
+          <li><strong>Travamentos e Corrupção de Dados:</strong> O Access frequentemente trava ou se corrompe quando mais de 5 a 10 pessoas tentam acessar os registros ao mesmo tempo.</li>
+          <li><strong>Limitação Física de Tamanho:</strong> Bancos de dados Access possuem um limite arquitetural de tamanho (geralmente próximo a 2GB). Quando o arquivo atinge esse volume, a aplicação entra em colapso.</li>
+          <li><strong>Falta de Acesso Web/Mobile:</strong> O Access foi projetado para redes locais (LAN). Acessá-lo via internet, de casa, pelo celular ou conectar integrações externas é praticamente impossível ou excessivamente inseguro.</li>
+        </ul>
+
+        <h2>O Caminho para a Nuvem</h2>
+        <p>
+          O processo de <strong>Migração de Access</strong> consiste em separar o que é dado (banco de dados) do que é comportamento (telas e formulários), e substituí-los por soluções modernas. A migração resolve todos os problemas de limite do Access de uma só vez, movendo seu sistema para tecnologias utilizadas pelas maiores empresas do mundo.
+        </p>
+        
+        <img 
+          src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" 
+          alt="Desenvolvimento de software e segurança cibernética" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        />
+
+        <h2>Como a Migração Funciona?</h2>
+        <p>
+          A modernização de um sistema feito em Access segue três etapas primordiais:
+        </p>
+        <ol>
+          <li><strong>Migração de Dados (Database Migration):</strong> Extraímos todos os dados históricos das tabelas legadas do Access e os transportamos, com integridade referencial, para bancos de dados relacionais robustos, como o PostgreSQL, SQL Server ou MySQL, operando diretamente na Nuvem.</li>
+          <li><strong>Refatoração de Regras (VBA):</strong> As macros e os códigos em VBA embutidos nos antigos formulários do Access são transcritos para lógicas seguras em backend (APIs).</li>
+          <li><strong>Recriação da Interface:</strong> As antigas telas cinzas do Access são substituídas por interfaces web responsivas, elegantes e com painéis de controle em tempo real (dashboards).</li>
+        </ol>
+
+        <h2>Vantagens da Modernização de Access</h2>
+        <p>
+          Migrando para tecnologias web, sua empresa passa a ter acessos ilimitados simultâneos sem travamentos. O limite de dados torna-se flexível, crescendo conforme o negócio. Além disso, backups automatizados garantem que você nunca mais precisará se preocupar com a corrupção do arquivo <em>.mdb</em>.
+        </p>
+      </article>
+
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">

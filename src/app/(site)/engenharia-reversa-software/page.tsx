@@ -1,26 +1,63 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Engenharia Reversa de Software | Hands On! Modernização',
-  description: 'Compreenda, recupere e documente o funcionamento exato de sistemas antigos ou de terceiros através de nossa metodologia de descoberta reversa, essencial para auditoria ou reconstrução.'
+  title: 'Engenharia Reversa de Software: Recupere o Controle do Seu Sistema',
+  description: 'Descubra como a engenharia reversa de software pode salvar sua empresa quando o código-fonte é perdido, documentando processos e garantindo a continuidade do negócio.',
 }
 
-export default function SEOPage() {
+export default function EngenhariaReversaPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Engenharia Reversa de Software</h1>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed" dangerouslySetInnerHTML={{ __html: 'Compreenda, recupere e documente o funcionamento exato de sistemas antigos ou de terceiros através de nossa metodologia de descoberta reversa, essencial para auditoria ou reconstrução.' }} />
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Engenharia Reversa de Software: Como Recuperar o Controle do Seu Sistema</h1>
         
-        <div className="prose prose-lg text-slate-700 max-w-none">
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Recuperando o Conhecimento</h2>
-          <p className="mb-8" dangerouslySetInnerHTML={{ __html: 'Ao longo dos anos, os profissionais que construíram seu software saem da empresa e levam o conhecimento.<br/><br/>Nossa Engenharia Reversa redescobre essas lógicas e gera o "Legacy Blueprint" definitivo da sua aplicação.' }} />
-          
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Abordagem Multidirecional</h2>
-          <p className="mb-12" dangerouslySetInnerHTML={{ __html: 'Investigamos telas, tabelas no banco de dados, pacotes de rede e manuais antigos para documentar regras de negócio que estavam ocultas.<br/><br/>Só reconstruímos depois que dominamos as regras.' }} />
-        </div>
-      </div>
-      
+        <img 
+          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80" 
+          alt="Código de computador e engenharia reversa" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+        />
+
+        <p>
+          Em muitas empresas, sistemas críticos operam há anos sem que a equipe atual entenda exatamente como eles funcionam por baixo dos panos. Com a rotatividade de desenvolvedores e a falta de documentação, o conhecimento se perde. É aqui que entra a <strong>Engenharia Reversa de Software</strong>.
+        </p>
+
+        <h2>O que é Engenharia Reversa de Software?</h2>
+        <p>
+          A engenharia reversa de software é o processo de analisar um sistema existente (seja um executável, um banco de dados legado ou uma aplicação em produção) para identificar seus componentes, dependências e lógicas de negócios. O objetivo é recriar a documentação ou até mesmo um novo código-fonte a partir do comportamento observado.
+        </p>
+        <p>
+          Na prática corporativa, isso não significa "hackear" o sistema, mas sim compreendê-lo profundamente para que ele possa ser mantido, atualizado ou migrado para tecnologias web e cloud sem que regras de negócios cruciais sejam esquecidas.
+        </p>
+
+        <h2>Quando a Engenharia Reversa é Necessária?</h2>
+        <ul>
+          <li><strong>Perda do Código-Fonte:</strong> O sistema roda, mas ninguém sabe onde está o código original (arquivos-fonte) que gerou o executável.</li>
+          <li><strong>Falta de Documentação:</strong> O software virou uma "caixa preta" e a equipe tem medo de fazer qualquer alteração ou integração.</li>
+          <li><strong>Integração com Novos Sistemas:</strong> É preciso conectar uma API moderna (como sistemas de pagamento ou emissão de notas fiscais) a um ERP legado que não possui manuais.</li>
+          <li><strong>Dependência de Funcionário Chave:</strong> Somente o criador original do software, que saiu da empresa há anos, entendia os cálculos matemáticos que o sistema faz.</li>
+        </ul>
+
+        <h2>Como Funciona o Processo na Prática?</h2>
+        <p>
+          O processo começa pela análise do comportamento do software (chamada de <em>Black-box testing</em> ou teste de caixa-preta) e pela interceptação rigorosa de todas as comunicações que a aplicação faz com o banco de dados. Nossa equipe mapeia as tabelas, os fluxos de dados e as regras exatas que o sistema aplica a cada clique do usuário.
+        </p>
+        
+        <img 
+          src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" 
+          alt="Análise de dados e engenharia reversa" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        />
+        
+        <p>
+          Com essas informações detalhadas em mãos, construímos uma <strong>Especificação Funcional Completa</strong>. A partir desse documento, sua empresa tem o poder de decidir os próximos passos de forma segura: manter o sistema atual com integrações modernas, ou reescrevê-lo do zero usando linguagens web atuais e seguras.
+        </p>
+
+        <h2>Os Benefícios para o Seu Negócio</h2>
+        <p>
+          Ao aplicar a engenharia reversa, a principal vitória é a redução drástica do <strong>Risco Tecnológico</strong>. Um sistema não documentado é uma bomba-relógio corporativa: se o servidor antigo falhar ou uma atualização do Windows quebrar a aplicação, a operação da empresa pode parar completamente. Documentar o comportamento do software garante que a operação continuará segura e escalável para o futuro.
+        </p>
+      </article>
+
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">

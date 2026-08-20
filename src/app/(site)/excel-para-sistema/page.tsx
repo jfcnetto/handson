@@ -1,26 +1,65 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Transformação de Excel para Software Web | Hands On! Modernização',
-  description: 'Sua empresa opera através de planilhas de Excel complexas e arriscadas? Transformamos suas lógicas e macros do Excel em um software corporativo estruturado, auditável e seguro.'
+  title: 'Transformação de Excel para Software Web Corporativo',
+  description: 'Planilhas pesadas, fórmulas quebradas e dados duplicados? Descubra como transformar o Excel da sua empresa em um sistema web seguro e centralizado.',
 }
 
-export default function SEOPage() {
+export default function ExcelParaSistemaPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Transformação de Excel para Software Web</h1>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed" dangerouslySetInnerHTML={{ __html: 'Sua empresa opera através de planilhas de Excel complexas e arriscadas?<br/><br/>Transformamos suas lógicas e macros do Excel em um software corporativo estruturado, auditável e seguro.' }} />
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Transformação de Excel para Software Web Corporativo</h1>
         
-        <div className="prose prose-lg text-slate-700 max-w-none">
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Quando o Excel se torna um perigo</h2>
-          <p className="mb-8" dangerouslySetInnerHTML={{ __html: 'Planilhas que circulam por e-mail, fórmulas quebradas por erro humano e falta de auditoria de quem modificou os dados geram riscos financeiros enormes.<br/><br/>O Excel não foi feito para ser o ERP da sua empresa.' }} />
-          
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">A transformação</h2>
-          <p className="mb-12" dangerouslySetInnerHTML={{ __html: 'Analisamos todas as suas abas, macros e fórmulas matemáticas, transformando tudo em regras de backend sólidas e em telas intuitivas.<br/><br/>O resultado é o fim da duplicidade de dados e o início da automação corporativa.' }} />
-        </div>
-      </div>
-      
+        <img 
+          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80" 
+          alt="Análise de dados corporativos e planilhas" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+        />
+
+        <p>
+          Toda grande empresa tem aquele funcionário ou setor que construiu uma "super planilha". Ela faz de tudo: cálculos complexos, gestão de estoque, projeções financeiras e envio de alertas. No entanto, quando <strong>o Excel se torna o ERP principal de um processo crítico</strong>, os riscos operacionais se multiplicam de forma alarmante.
+        </p>
+
+        <h2>Quando o Excel se Torna um Perigo</h2>
+        <p>
+          O Microsoft Excel é a ferramenta de produtividade mais brilhante já inventada, mas ele não foi desenhado para atuar como o coração corporativo de uma empresa. O uso indevido de planilhas traz problemas estruturais:
+        </p>
+        <ul>
+          <li><strong>Versões Conflitantes:</strong> A planilha "Controle_Final_v3_Revisada.xlsx" circula por e-mail e ninguém sabe quem possui os dados mais atualizados.</li>
+          <li><strong>Falta de Auditoria (Logs):</strong> Se um número for apagado ou alterado acidentalmente, não há como rastrear com facilidade quem fez a mudança ou quando ela ocorreu.</li>
+          <li><strong>Fórmulas Quebradas:</strong> Uma ordenação errada ou uma linha deletada pode corromper referências importantes (PROCV/VLOOKUP), gerando prejuízos silenciosos.</li>
+          <li><strong>Lentidão e Limite de Dados:</strong> Planilhas muito grandes começam a travar o computador dos funcionários.</li>
+        </ul>
+
+        <h2>O Caminho da Transformação Digital</h2>
+        <p>
+          A solução não é abandonar a lógica construída durante anos no Excel, mas sim <strong>transformá-la em um Sistema Web</strong>. Ao converter planilhas para um software corporativo estruturado, o conhecimento do negócio é transferido para um código seguro, organizado e escalável.
+        </p>
+
+        <img 
+          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" 
+          alt="Dashboard de sistema web moderno" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        />
+
+        <h2>Como Fazemos a Conversão de Excel para Web?</h2>
+        <p>
+          O processo realizado pela nossa equipe envolve uma engenharia reversa minuciosa da sua planilha:
+        </p>
+        <ol>
+          <li><strong>Mapeamento de Dados:</strong> Transformamos as abas e colunas da planilha em um Banco de Dados Relacional robusto (com backups automáticos).</li>
+          <li><strong>Tradução de Fórmulas e Macros (VBA):</strong> Todas as regras matemáticas e fluxos lógicos são traduzidos para linguagens de programação de servidor (Back-end), blindando-as contra edições acidentais de usuários.</li>
+          <li><strong>Criação da Interface:</strong> Substituímos as células confusas do Excel por Telas, Dashboards e Formulários amigáveis, acessíveis de qualquer navegador ou celular.</li>
+          <li><strong>Controle de Acessos:</strong> Implementamos login, senhas e perfis de usuário, garantindo que o setor de Vendas veja apenas vendas e a Diretoria tenha acesso aos relatórios completos.</li>
+        </ol>
+
+        <h2>Vantagens Imediatas</h2>
+        <p>
+          Transformar Excel em sistema próprio permite que vários funcionários trabalhem no mesmo dado simultaneamente, sem travar o arquivo. Elimina-se o risco de perder planilhas cruciais. É o primeiro e mais importante passo para a automação e escalabilidade da sua operação.
+        </p>
+      </article>
+
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">

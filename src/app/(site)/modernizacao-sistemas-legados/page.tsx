@@ -1,26 +1,63 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Modernização de Sistemas Legados | Hands On! Modernização',
-  description: 'A modernização de sistemas legados é o processo de atualização de softwares antigos que, apesar de funcionais, utilizam tecnologias obsoletas que travam o crescimento do seu negócio. A Hands On! atua refatorando, migrando e reconstruindo aplicações de forma segura e progressiva.'
+  title: 'Modernização de Sistemas Legados: O Guia Completo para Evoluir Seu ERP',
+  description: 'Saiba por que manter um sistema legado custa caro e como a modernização de sistemas pode transformar a arquitetura do seu negócio com segurança e performance em nuvem.',
 }
 
-export default function SEOPage() {
+export default function ModernizacaoSistemasLegadosPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Modernização de Sistemas Legados</h1>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed" dangerouslySetInnerHTML={{ __html: 'A modernização de sistemas legados é o processo de atualização de softwares antigos que, apesar de funcionais, utilizam tecnologias obsoletas que travam o crescimento do seu negócio.<br/><br/>A Hands On! atua refatorando, migrando e reconstruindo aplicações de forma segura e progressiva.' }} />
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Modernização de Sistemas Legados: O Guia Completo para Evoluir Seu ERP</h1>
         
-        <div className="prose prose-lg text-slate-700 max-w-none">
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Por que modernizar seu sistema legado?</h2>
-          <p className="mb-8" dangerouslySetInnerHTML={{ __html: 'Manter um sistema antigo muitas vezes custa mais do que atualizá-lo.<br/><br/>Com o tempo, a tecnologia se torna incompatível, os profissionais desaparecem do mercado e o risco de interrupção aumenta drasticamente.' }} />
-          
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Nossa abordagem</h2>
-          <p className="mb-12" dangerouslySetInnerHTML={{ __html: 'Não começamos programando.<br/><br/>Nossa metodologia baseada no Legacy Assessment nos permite mapear completamente suas regras de negócio antes de qualquer migração, garantindo zero perda de conhecimento e a continuidade segura da sua operação.' }} />
-        </div>
-      </div>
-      
+        <img 
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" 
+          alt="Tecnologia moderna e migração para a nuvem" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+        />
+
+        <p>
+          Se a sua empresa ainda depende de um software desenvolvido há mais de 10 anos, você sabe bem a dor de cabeça que é mantê-lo rodando. Erros constantes, telas lentas, dificuldade de integração e a impossibilidade de trabalhar pelo celular ou fora do escritório. A solução definitiva para isso chama-se <strong>Modernização de Sistemas Legados</strong>.
+        </p>
+
+        <h2>O que é um Sistema Legado?</h2>
+        <p>
+          No mundo da TI corporativa, chamamos de "legado" qualquer software, tecnologia ou método que já é obsoleto, mas continua sendo utilizado porque desempenha um papel crítico nos processos da empresa. Geralmente, são sistemas monolíticos, instalados em servidores físicos locais, que utilizam linguagens de programação que a maioria dos desenvolvedores atuais não conhece mais (como Delphi, VB6, Cobol, etc).
+        </p>
+
+        <h2>Por que Manter um Sistema Antigo Custa Caro?</h2>
+        <p>
+          Muitos gestores adiam a modernização pensando em economia. Mas a verdade é que o sistema legado drena recursos de forma silenciosa:
+        </p>
+        <ul>
+          <li><strong>Custo de Manutenção:</strong> Encontrar programadores experientes em linguagens antigas é raro e muito caro.</li>
+          <li><strong>Falta de Mobilidade:</strong> Seus funcionários precisam estar na empresa para usar o sistema, limitando home-office e vendas externas.</li>
+          <li><strong>Vulnerabilidade de Segurança:</strong> Ferramentas antigas não recebem mais atualizações de segurança, abrindo portas gigantescas para ataques de ransomware.</li>
+          <li><strong>Isolamento de Dados:</strong> O sistema legado não se comunica com as ferramentas modernas do mercado (NFs, APIs bancárias, CRMs).</li>
+        </ul>
+
+        <h2>Como Fazemos a Modernização?</h2>
+        <p>
+          Substituir o coração da empresa exige planejamento rigoroso. Não acreditamos no modelo "desligue tudo hoje e ligue o novo amanhã". A abordagem correta é a modernização progressiva.
+        </p>
+        
+        <img 
+          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" 
+          alt="Servidores locais antigos sendo substituídos por nuvem" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        />
+        
+        <p>
+          Extraímos as regras de negócio do sistema antigo e construímos, paralelamente, um software web robusto. Esse novo software pode rodar na Nuvem (Cloud), acessível de qualquer lugar através do navegador ou celular. Realizamos a migração dos dados históricos para o novo banco de dados relacional (como PostgreSQL) sem perder nenhuma informação valiosa do passado.
+        </p>
+
+        <h2>Resultados da Evolução Digital</h2>
+        <p>
+          Com a modernização, sua empresa ganha velocidade, segurança e, acima de tudo, a capacidade de inovar e criar integrações para competir com outras empresas no mercado atual. A migração tira a sua operação da "sobrevivência" e a coloca no modo "crescimento estruturado".
+        </p>
+      </article>
+
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">
