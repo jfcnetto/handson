@@ -13,7 +13,7 @@ const FUNNEL_STAGES = [
   { id: 'WON', title: 'Contratado' },
 ]
 
-export default function KanbanBoard({ initialLeads }: { initialLeads: any[] }) {
+export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initialLeads: any[], pricingTiers?: any[] }) {
   const [leads, setLeads] = useState(initialLeads)
   const [updating, setUpdating] = useState<string | null>(null)
   const [selectedLead, setSelectedLead] = useState<any | null>(null)
@@ -62,14 +62,14 @@ export default function KanbanBoard({ initialLeads }: { initialLeads: any[] }) {
                         <p className="text-xs text-slate-500 line-clamp-1">{lead.name}</p>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 mt-1">
-                        <div className="flex flex-col">
-                          <span className="text-[10px] text-slate-400 font-semibold uppercase">Score</span>
-                          <span className="text-sm font-bold text-blue-600">{lead.legacyComplexityScore}</span>
-                        </div>
-                        <div className="flex flex-col text-right">
-                          <span className="text-[10px] text-slate-400 font-semibold uppercase">Intent</span>
-                          <span className="text-sm font-bold text-green-600">{lead.leadIntentScore}</span>
+                      <div className="grid grid-cols-1 gap-2 mt-1">
+                        <div className="flex flex-col gap-2 text-xs">
+                          <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded inline-block w-fit">
+                            Score Técnico: {((lead.legacyComplexityScore + lead.reverseEngineeringRisk) / 2).toFixed(0)}/100
+                          </span>
+                          <span className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded inline-block w-fit">
+                            Interesse de Compra: {lead.leadIntentScore}/100
+                          </span>
                         </div>
                       </div>
 
@@ -139,7 +139,7 @@ export default function KanbanBoard({ initialLeads }: { initialLeads: any[] }) {
                       <p><strong className="text-slate-900">Sistema Alvo:</strong> {selectedLead.targetSystem}</p>
                       <p><strong className="text-slate-900">Tech Stack:</strong> {selectedLead.technology}</p>
                       <p><strong className="text-slate-900">Banco de Dados:</strong> {selectedLead.database}</p>
-                      <p><strong className="text-slate-900">Possui Código-fonte:</strong> {selectedLead.hasSourceCode ? 'Sim' : 'Não'}</p>
+                      <p><strong className="text-slate-900">Possui Código-fonte:</strong> {selectedLead.hasSourceCode}</p>
                       <p><strong className="text-slate-900">Documentação:</strong> {selectedLead.documentation}</p>
                     </div>
                   </div>
@@ -152,6 +152,32 @@ export default function KanbanBoard({ initialLeads }: { initialLeads: any[] }) {
                     <div className="space-y-2 text-sm text-slate-700">
                       <p><strong className="text-slate-900">Nível de Criticidade:</strong> {selectedLead.businessCriticality}</p>
                       <p><strong className="text-slate-900">Centralização de Conhecimento:</strong> {selectedLead.knowledgeCentralization}</p>
+                      {selectedLead.legacyComplexityScore !== undefined && selectedLead.reverseEngineeringRisk !== undefined && (
+                        <p>
+                          <strong className="text-slate-900">Score Técnico (Diagnóstico):</strong>{' '}
+                          <span className="font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+                            {((selectedLead.legacyComplexityScore + selectedLead.reverseEngineeringRisk) / 2).toFixed(0)}/100
+                          </span>
+                        </p>
+                      )}
+                      {(() => {
+                        const totalScore = (selectedLead.legacyComplexityScore + selectedLead.reverseEngineeringRisk) / 2;
+                        const matchedTier = pricingTiers.find((t: any) => totalScore >= t.minScore && totalScore <= t.maxScore);
+                        const estMin = matchedTier ? matchedTier.minValue : selectedLead.estimatedRangeMin;
+                        const estMax = matchedTier ? matchedTier.maxValue : selectedLead.estimatedRangeMax;
+                        
+                        if (estMin !== null && estMax !== null) {
+                          return (
+                            <p>
+                              <strong className="text-slate-900">Valor Estimado:</strong>{' '}
+                              {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(estMin)}
+                              {' - '}
+                              {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(estMax)}
+                            </p>
+                          );
+                        }
+                        return null;
+                      })()}
                     </div>
                   </div>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Migração de Access para Web: Como Modernizar seu Banco de Dados',
@@ -11,10 +12,11 @@ export default function MigracaoAccessPage() {
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Microsoft Access para Sistemas Web Modernos</h1>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80" 
           alt="Servidor de banco de dados corporativo" 
           className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+          width={1200} height={800}
         />
 
         <p>
@@ -45,10 +47,11 @@ export default function MigracaoAccessPage() {
           A migração resolve todos os problemas de limite do Access de uma só vez, movendo seu sistema para tecnologias utilizadas pelas maiores empresas do mundo.
         </p>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" 
           alt="Desenvolvimento de software e segurança cibernética" 
           className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+          width={1200} height={800}
         />
 
         <h2>Como a Migração Funciona?</h2>

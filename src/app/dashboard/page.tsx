@@ -14,6 +14,10 @@ export default async function DashboardPage() {
     status: l.status || 'NEW'
   }))
 
+  const pricingTiers = await prisma.pricingTier.findMany({
+    orderBy: { minScore: 'asc' }
+  })
+
   return (
     <>
       <header className="flex items-center justify-between mb-4">
@@ -23,7 +27,7 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <KanbanBoard initialLeads={processedLeads} />
+      <KanbanBoard initialLeads={processedLeads} pricingTiers={pricingTiers} />
     </>
   )
 }

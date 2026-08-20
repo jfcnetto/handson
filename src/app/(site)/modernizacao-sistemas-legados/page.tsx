@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Modernização de Sistemas Legados: O Guia Completo para Evoluir Seu ERP',
@@ -11,10 +12,11 @@ export default function ModernizacaoSistemasLegadosPage() {
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Modernização de Sistemas Legados: O Guia Completo para Evoluir Seu ERP</h1>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" 
           alt="Tecnologia moderna e migração para a nuvem" 
           className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+          width={1200} height={800}
         />
 
         <p>
@@ -60,10 +62,11 @@ export default function ModernizacaoSistemasLegadosPage() {
           A abordagem correta é a modernização progressiva.
         </p>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" 
           alt="Servidores locais antigos sendo substituídos por nuvem" 
           className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+          width={1200} height={800}
         />
         
         <p>

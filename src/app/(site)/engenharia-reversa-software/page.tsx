@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Engenharia Reversa de Software: Recupere o Controle do Seu Sistema',
@@ -11,10 +12,11 @@ export default function EngenhariaReversaPage() {
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Engenharia Reversa de Software: Como Recuperar o Controle do Seu Sistema</h1>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80" 
           alt="Código de computador e engenharia reversa" 
           className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+          width={1200} height={800}
         />
 
         <p>
@@ -54,10 +56,11 @@ export default function EngenhariaReversaPage() {
           Nossa equipe mapeia as tabelas, os fluxos de dados e as regras exatas que o sistema aplica a cada clique do usuário.
         </p>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" 
           alt="Análise de dados e engenharia reversa" 
           className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+          width={1200} height={800}
         />
         
         <p>

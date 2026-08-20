@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import DiagnosticoForm from '@/components/DiagnosticoForm'
 
@@ -23,7 +24,7 @@ export default function HomePage() {
           </div>
           <div className="lg:w-1/2 mt-12 lg:mt-0 relative">
             <div className="absolute inset-0 bg-blue-100 transform translate-x-4 translate-y-4 rounded-2xl opacity-50 blur-lg max-w-md mx-auto"></div>
-            <img src="/hero.jpg" alt="Equipe analisando arquitetura de software em tela de vidro corporativa" className="relative mx-auto rounded-2xl shadow-2xl border border-slate-200 object-cover w-full max-w-md h-[350px]" />
+            <Image src="/hero.jpg" alt="Equipe analisando arquitetura de software em tela de vidro corporativa" className="relative mx-auto rounded-2xl shadow-2xl border border-slate-200 object-cover w-full max-w-md h-[350px]" width={1200} height={800} />
           </div>
         </div>
         {/* Background Decorative Pattern */}
@@ -104,7 +105,7 @@ export default function HomePage() {
           </div>
           <div className="lg:w-1/2 relative">
              <div className="absolute inset-0 bg-blue-500 transform -translate-x-4 -translate-y-4 rounded-2xl opacity-20 blur-xl"></div>
-             <img src="/modernization.jpg" alt="Transformando processos antigos em software moderno" className="relative rounded-2xl shadow-2xl border border-slate-800 object-cover w-full" />
+             <Image src="/modernization.jpg" alt="Transformando processos antigos em software moderno" className="relative rounded-2xl shadow-2xl border border-slate-800 object-cover w-full" width={1200} height={800} />
           </div>
         </div>
       </section>

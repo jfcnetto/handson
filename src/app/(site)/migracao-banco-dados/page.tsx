@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Migração de Banco de Dados: Como Transferir o Coração da Empresa',
@@ -11,10 +12,11 @@ export default function MigracaoBancoDadosPage() {
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Banco de Dados: Como Transferir o Coração da Sua Empresa</h1>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" 
           alt="Servidores e painéis de dados em data center" 
           className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+          width={1200} height={800}
         />
 
         <p>
@@ -55,10 +57,11 @@ export default function MigracaoBancoDadosPage() {
           Por fim, <strong>Carregamos</strong> o histórico purificado no novo banco de dados (como PostgreSQL hospedado em Cloud), realizando testes intensivos automatizados para garantir a integridade de todas as referências.
         </p>
 
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80" 
           alt="Gráficos de dados em telas e transformação digital" 
           className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+          width={1200} height={800}
         />
 
         <h2>A Garantia de Zero Inatividade</h2>

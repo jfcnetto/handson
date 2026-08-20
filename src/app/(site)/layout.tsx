@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ReactNode } from 'react'
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
@@ -9,7 +10,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
           <div className="flex justify-between h-24 items-center">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center">
-                <img src="/logo.png" alt="Hands ON! Logo" className="h-20 w-auto object-contain scale-125 origin-left" />
+                <Image src="/logo.png" alt="Hands ON! Logo" className="h-20 w-auto object-contain scale-125 origin-left" width={200} height={80} />
               </Link>
             </div>
             <nav className="hidden md:flex space-x-8 items-center">
@@ -51,7 +52,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="inline-block mb-4 hover:opacity-80 transition-opacity">
-              <img src="/logo.png" alt="Hands ON! Logo" className="h-20 w-auto object-contain scale-110 origin-left" />
+              <Image src="/logo.png" alt="Hands ON! Logo" className="h-20 w-auto object-contain scale-110 origin-left" width={200} height={80} />
             </Link>
             <p className="mt-4 text-sm text-slate-500">
               Modernizamos sistemas legados preservando seus dados e o conhecimento do seu negócio.

@@ -78,7 +78,7 @@ export default function ConfigsPage() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200">
-                  <th className="pb-3 font-medium text-slate-500 text-sm">Nível (Classificação)</th>
+                  <th className="pb-3 font-medium text-slate-500 text-sm">Complexidade Técnica</th>
                   <th className="pb-3 font-medium text-slate-500 text-sm text-center">Score do Diagnóstico</th>
                   <th className="pb-3 font-medium text-slate-500 text-sm">Valor Mínimo (R$)</th>
                   <th className="pb-3 font-medium text-slate-500 text-sm">Valor Máximo (R$)</th>

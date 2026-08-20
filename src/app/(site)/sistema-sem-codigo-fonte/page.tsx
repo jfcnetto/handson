@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Como Recuperar um Sistema Sem Código-Fonte',
@@ -11,10 +12,11 @@ export default function SistemaSemCodigoFontePage() {
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Como Manter e Evoluir um Sistema Sem Código-Fonte</h1>
         
-        <img 
+        <Image 
           src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=1200&q=80" 
           alt="Programador frustrado tentando entender um sistema fechado" 
           className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+          width={1200} height={800}
         />
 
         <p>
@@ -48,10 +50,11 @@ export default function SistemaSemCodigoFontePage() {
           No entanto, recriar um sistema complexo "do zero" contando apenas com a memória dos funcionários costuma resultar em fracasso, pois muitas regras de negócios ocultas acabam esquecidas.
         </p>
         
-        <img 
-          src="https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?auto=format&fit=crop&w=1200&q=80" 
-          alt="Recuperação de dados e planejamento de novo sistema" 
-          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        <Image 
+          src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1200&q=80" 
+          alt="Engenharia reversa e recuperação de código" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+          width={1200} height={800}
         />
 
         <h2>A Abordagem Técnica da Hands On!</h2>
