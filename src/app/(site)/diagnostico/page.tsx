@@ -8,7 +8,7 @@ export default function LegacyCheckPage() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<any>(null)
   const [formData, setFormData] = useState({
-    name: '', email: '', company: '', jobTitle: '', companySize: '',
+    name: '', email: '', phone: '', company: '', jobTitle: '', companySize: '',
     targetSystem: '', hasSourceCode: '', technology: [] as string[], database: '', documentation: '',
     knowledgeCentralization: '', businessCriticality: '', motivation: [] as string[], urgency: ''
   })
@@ -46,6 +46,7 @@ export default function LegacyCheckPage() {
               Nome: formData.name,
               Email: formData.email,
               Empresa: formData.company,
+              Telefone: formData.phone,
               Cargo: formData.jobTitle,
               Score: res.legacyComplexityScore || "Calculado"
           })
@@ -118,6 +119,10 @@ export default function LegacyCheckPage() {
                 <div>
                   <label className="block text-sm font-medium text-slate-700">E-mail Corporativo</label>
                   <input required type="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-slate-50 p-2 border" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700">Telefone / WhatsApp</label>
+                  <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-slate-50 p-2 border" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700">Empresa</label>

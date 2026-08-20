@@ -6,9 +6,21 @@ export async function getUserProfile(email: string) {
   if (!email) return null;
   
   try {
-    const user = await prisma.user.findUnique({
+    let user = await prisma.user.findUnique({
       where: { email }
     })
+
+    // Auto-cadastro do administrador principal caso não exista no banco
+    if (!user && email === 'jfcnetto@gmail.com') {
+      user = await prisma.user.create({
+        data: {
+          email,
+          name: 'João Francisco',
+          role: 'ADMIN'
+        }
+      })
+    }
+
     return user;
   } catch (err) {
     console.error("Error fetching user profile:", err);

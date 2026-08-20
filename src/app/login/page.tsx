@@ -32,7 +32,7 @@ export default function LoginPage() {
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           Área Administrativa
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-600">
+        <p className="mt-2 text-center text-sm font-medium text-slate-700">
           Acesso restrito
         </p>
       </div>
@@ -48,7 +48,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleEmailLogin} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-slate-700">
+              <label className="block text-sm font-semibold text-slate-900">
                 E-mail Corporativo
               </label>
               <div className="mt-1">
@@ -57,13 +57,13 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-50"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-400 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-slate-900 font-medium"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700">
+              <label className="block text-sm font-semibold text-slate-900">
                 Senha
               </label>
               <div className="mt-1">
@@ -72,7 +72,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-slate-50"
+                  className="appearance-none block w-full px-3 py-2 border border-slate-400 rounded-md shadow-sm placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-slate-900 font-medium"
                 />
               </div>
             </div>

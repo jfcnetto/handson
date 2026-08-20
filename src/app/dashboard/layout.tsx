@@ -48,7 +48,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     return null
   }
 
-  const isRestrictedRoute = pathname.includes('/financas') || pathname.includes('/usuarios')
+  const isRestrictedRoute = pathname.includes('/financas') || pathname.includes('/usuarios') || pathname.includes('/configuracoes')
   if (isRestrictedRoute && userProfile.role !== 'ADMIN') {
     return (
       <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-4">
@@ -70,7 +70,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: 'Leads', href: '/dashboard' },
     ...(userProfile.role === 'ADMIN' ? [
       { name: 'Finanças', href: '/dashboard/financas' },
-      { name: 'Usuários', href: '/dashboard/usuarios' }
+      { name: 'Usuários', href: '/dashboard/usuarios' },
+      { name: 'Configurações', href: '/dashboard/configuracoes' }
     ] : [])
   ]
 
@@ -78,10 +79,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen bg-[#F8FAFC] font-sans flex flex-col">
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
+          <div className="flex justify-between h-20 items-center">
             
             <div className="flex-shrink-0 flex items-center gap-8">
-              <span className="text-2xl font-bold text-slate-800 tracking-tight">Hands <span className="text-blue-600">O</span>N! <span className="text-slate-400 text-lg font-normal ml-2">CRM</span></span>
+              <Link href="/dashboard" className="flex items-center">
+                <img src="/logo.png" alt="Hands On!" className="h-16 w-auto" />
+              </Link>
               
               <nav className="hidden md:flex space-x-4">
                 {navItems.map(item => (

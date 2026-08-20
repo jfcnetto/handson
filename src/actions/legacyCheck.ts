@@ -22,7 +22,19 @@ export async function submitLegacyCheck(data: any) {
     const businessCriticalityScore = AssessmentEngine.calculateCriticality(answers)
     const leadIntentScore = AssessmentEngine.calculateIntent(answers)
 
-    const estimate = AssessmentEngine.calculateAssessmentRange(legacyComplexityScore, reverseEngineeringRisk)
+    const totalScore = (legacyComplexityScore + reverseEngineeringRisk) / 2
+
+    // Get pricing tier from DB
+    const tiers = await prisma.pricingTier.findMany()
+    let matchedTier = tiers.find(t => totalScore >= t.minScore && totalScore <= t.maxScore)
+    
+    // Fallback logic in case DB is empty or score is out of bounds
+    let estimateMin = 2500
+    let estimateMax = 4000
+    if (matchedTier) {
+      estimateMin = matchedTier.minValue
+      estimateMax = matchedTier.maxValue
+    }
 
     let recommendedService = 'Hands On Legacy Check'
     if (legacyComplexityScore > 40 || reverseEngineeringRisk > 40) {
@@ -33,6 +45,7 @@ export async function submitLegacyCheck(data: any) {
       data: {
         name: data.name,
         email: data.email,
+        phone: data.phone,
         company: data.company,
         jobTitle: data.jobTitle,
         companySize: data.companySize,
@@ -53,15 +66,15 @@ export async function submitLegacyCheck(data: any) {
         businessCriticalityScore,
         leadIntentScore,
 
-        estimatedRangeMin: estimate.min,
-        estimatedRangeMax: estimate.max,
+        estimatedRangeMin: estimateMin,
+        estimatedRangeMax: estimateMax,
         recommendedService,
         
         status: 'NEW'
       }
     })
 
-    return { success: true, leadId: lead.id, legacyComplexityScore, estimatedRangeMin: estimate.min, estimatedRangeMax: estimate.max }
+    return { success: true, leadId: lead.id, legacyComplexityScore, estimatedRangeMin: estimateMin, estimatedRangeMax: estimateMax }
   } catch (error) {
     console.error('Submit Legacy Check Error:', error)
     return { success: false, error: 'Erro ao processar avaliação.' }

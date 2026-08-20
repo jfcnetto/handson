@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   })
 
   // Ensure default status is set for old leads
-  const processedLeads = leads.map(l => ({
+  const processedLeads = leads.map((l: any) => ({
     ...l,
     status: l.status || 'NEW'
   }))

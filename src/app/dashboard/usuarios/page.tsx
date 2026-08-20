@@ -54,30 +54,30 @@ export default function UsuariosPage() {
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Nome</label>
+                <label className="block text-sm font-semibold text-slate-900 mb-1">Nome</label>
                 <input 
                   type="text" 
                   required 
-                  className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-slate-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-slate-900 font-medium"
                   value={formData.name}
                   onChange={e => setFormData({...formData, name: e.target.value})}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">E-mail</label>
+                <label className="block text-sm font-semibold text-slate-900 mb-1">E-mail</label>
                 <input 
                   type="email" 
                   required 
-                  className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-slate-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-slate-900 font-medium"
                   value={formData.email}
                   onChange={e => setFormData({...formData, email: e.target.value})}
                 />
                 <p className="text-xs text-slate-500 mt-1">Este e-mail deve ser o mesmo utilizado para login no Google.</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Perfil</label>
+                <label className="block text-sm font-semibold text-slate-900 mb-1">Perfil</label>
                 <select 
-                  className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-slate-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-slate-900 font-medium"
                   value={formData.role}
                   onChange={e => setFormData({...formData, role: e.target.value})}
                 >
