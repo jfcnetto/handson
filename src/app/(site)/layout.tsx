@@ -1,48 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ReactNode } from 'react'
+import Header from '@/components/Header'
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans flex flex-col">
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-24 items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="flex items-center">
-                <Image src="/logo.png" alt="Hands ON! Logo" className="h-20 w-auto object-contain scale-125 origin-left" width={200} height={80} />
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8 items-center">
-              <Link href="/" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Início</Link>
-              
-              <div className="relative group py-2">
-                <button className="text-slate-600 group-hover:text-blue-600 font-medium text-sm transition-colors flex items-center gap-1">
-                  Serviços
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div className="absolute top-full left-0 w-56 bg-white border border-slate-200 shadow-xl rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="py-2">
-                    <Link href="/modernizacao-sistemas-legados" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Sistemas Legados</Link>
-                    <Link href="/sistema-sem-codigo-fonte" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Sem Código-Fonte</Link>
-                    <Link href="/excel-para-sistema" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Excel para Web</Link>
-                    <Link href="/migracao-access" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600">Migração Access</Link>
-                  </div>
-                </div>
-              </div>
-
-              <Link href="/engenharia-reversa-software" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Engenharia Reversa</Link>
-              <Link href="/contato" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Contato</Link>
-              <Link href="/sobre" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Sobre Nós</Link>
-            </nav>
-            <div className="flex items-center">
-              <Link href="/diagnostico" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm">
-                ANALISAR MEU SISTEMA
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="flex-grow">
         {children}

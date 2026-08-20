@@ -24,6 +24,7 @@ model Lead {
   phone                   String?
   jobTitle                String?
   companySize             String?
+  document                String?
 
   // Etapa 2
   targetSystem            String?

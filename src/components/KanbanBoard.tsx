@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { updateLeadStatus } from '@/actions/lead'
+import { updateLeadStatus, updateLeadDocument } from '@/actions/lead'
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx'
+import { saveAs } from 'file-saver'
 
 const FUNNEL_STAGES = [
   { id: 'NEW', title: 'Novo Diagnóstico' },
@@ -17,10 +19,113 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
   const [leads, setLeads] = useState(initialLeads)
   const [updating, setUpdating] = useState<string | null>(null)
   const [selectedLead, setSelectedLead] = useState<any | null>(null)
+  const [docValue, setDocValue] = useState('')
 
   useEffect(() => {
     setLeads(initialLeads)
   }, [initialLeads])
+
+  useEffect(() => {
+    if (selectedLead) {
+      setDocValue(selectedLead.document || '')
+    }
+  }, [selectedLead])
+
+  const handleSaveDocument = async () => {
+    if (!selectedLead) return
+    setUpdating(selectedLead.id)
+    const res = await updateLeadDocument(selectedLead.id, docValue)
+    if (res.success) {
+      setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, document: docValue } : l))
+      setSelectedLead({ ...selectedLead, document: docValue })
+    }
+    setUpdating(null)
+  }
+
+  const handleGenerateProposal = async () => {
+    if (!selectedLead) return
+    
+    const totalScore = (selectedLead.legacyComplexityScore + selectedLead.reverseEngineeringRisk) / 2
+    const matchedTier = pricingTiers.find((t: any) => totalScore >= t.minScore && totalScore <= t.maxScore)
+    const estMax = matchedTier ? matchedTier.maxValue : selectedLead.estimatedRangeMax
+    
+    if (!estMax) {
+      alert("Não há valor máximo estimado para gerar a proposta.")
+      return
+    }
+
+    const proposalValue = estMax * 0.87
+    const formattedValue = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(proposalValue)
+
+    const doc = new Document({
+      sections: [{
+        properties: {},
+        children: [
+          new Paragraph({
+            text: "PROPOSTA COMERCIAL",
+            heading: HeadingLevel.TITLE,
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 400 }
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Cliente: ", bold: true }),
+              new TextRun(selectedLead.company || "Não informado"),
+            ],
+            spacing: { after: 200 }
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Contato: ", bold: true }),
+              new TextRun(selectedLead.name || "Não informado"),
+            ],
+            spacing: { after: 200 }
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({ text: "CPF/CNPJ: ", bold: true }),
+              new TextRun(selectedLead.document || docValue || "Não informado"),
+            ],
+            spacing: { after: 400 }
+          }),
+          new Paragraph({
+            text: "1. OBJETIVO",
+            heading: HeadingLevel.HEADING_1,
+            spacing: { before: 200, after: 200 }
+          }),
+          new Paragraph({
+            text: `Modernização e engenharia reversa do sistema alvo: ${selectedLead.targetSystem || "Não especificado"}.`,
+            spacing: { after: 400 }
+          }),
+          new Paragraph({
+            text: "2. ESCOPO TÉCNICO RESUMIDO",
+            heading: HeadingLevel.HEADING_1,
+            spacing: { before: 200, after: 200 }
+          }),
+          new Paragraph({
+            text: `Tecnologia Atual: ${selectedLead.technology || "Não informado"}\nBanco de Dados: ${selectedLead.database || "Não informado"}\nPossui Código-fonte: ${selectedLead.hasSourceCode || "Não informado"}`,
+            spacing: { after: 400 }
+          }),
+          new Paragraph({
+            text: "3. INVESTIMENTO",
+            heading: HeadingLevel.HEADING_1,
+            spacing: { before: 200, after: 200 }
+          }),
+          new Paragraph({
+            children: [
+              new TextRun("O valor total estimado para a execução dos serviços descritos é de "),
+              new TextRun({ text: formattedValue, bold: true }),
+              new TextRun(". Este valor já inclui todas as fases de diagnóstico profundo, modernização e entrega da nova arquitetura."),
+            ],
+            spacing: { after: 400 }
+          }),
+        ],
+      }]
+    })
+
+    const blob = await Packer.toBlob(doc)
+    saveAs(blob, `Proposta_${selectedLead.company.replace(/\s+/g, '_')}.docx`)
+  }
 
   const handleStatusChange = async (leadId: string, newStatus: string) => {
     setUpdating(leadId)
@@ -130,10 +235,29 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Contato</h3>
-                    <div className="space-y-2 text-sm text-slate-700">
+                    <div className="space-y-3 text-sm text-slate-700">
                       <p><strong className="text-slate-900">E-mail:</strong> {selectedLead.email}</p>
                       <p><strong className="text-slate-900">Telefone:</strong> {selectedLead.phone}</p>
                       <p><strong className="text-slate-900">Tamanho da Empresa:</strong> {selectedLead.companySize}</p>
+                      <div className="flex flex-col gap-1">
+                        <strong className="text-slate-900">CPF/CNPJ:</strong>
+                        <div className="flex gap-2">
+                          <input 
+                            type="text" 
+                            className="border border-slate-200 rounded px-2 py-1 flex-grow focus:outline-none focus:border-blue-400 text-sm"
+                            value={docValue}
+                            onChange={(e) => setDocValue(e.target.value)}
+                            placeholder="000.000.000-00 ou 00.000.000/0000-00"
+                          />
+                          <button 
+                            onClick={handleSaveDocument}
+                            disabled={updating === selectedLead.id || docValue === selectedLead.document}
+                            className="bg-slate-800 text-white px-3 py-1 rounded text-xs font-medium disabled:opacity-50 hover:bg-slate-700 transition"
+                          >
+                            Salvar
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -207,7 +331,17 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
             </div>
 
             {/* Footer / Actions */}
-            <div className="px-6 py-4 border-t border-slate-100 bg-white flex justify-end gap-3">
+            <div className="px-6 py-4 border-t border-slate-100 bg-white flex justify-between items-center gap-3">
+              <div>
+                <button 
+                  onClick={handleGenerateProposal}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition shadow-sm"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                  Gerar Proposta (DOCX)
+                </button>
+              </div>
+              <div className="flex gap-3">
               <a 
                 href={`mailto:${selectedLead.email}`}
                 className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-200 transition"
@@ -226,6 +360,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               </a>
             </div>
           </div>
+        </div>
         </div>
       )}
     </>

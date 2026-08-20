@@ -109,3 +109,17 @@ export async function updateLeadStatus(leadId: string, newStatus: string) {
     return { success: false, error: "Erro ao atualizar status do lead." }
   }
 }
+
+export async function updateLeadDocument(leadId: string, document: string) {
+  try {
+    const updated = await prisma.lead.update({
+      where: { id: leadId },
+      data: { document }
+    })
+    revalidatePath('/dashboard')
+    return { success: true, lead: updated }
+  } catch (err) {
+    console.error("Error updating lead document:", err)
+    return { success: false, error: "Erro ao atualizar documento do lead." }
+  }
+}
