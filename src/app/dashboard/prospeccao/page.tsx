@@ -18,6 +18,7 @@ export default function ProspeccaoPage() {
   const [error, setError] = useState('')
   const [adding, setAdding] = useState<string | null>(null)
   const [addedProspects, setAddedProspects] = useState<string[]>([])
+  const [filterType, setFilterType] = useState('ALL')
 
   useEffect(() => {
     fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
@@ -158,9 +159,47 @@ export default function ProspeccaoPage() {
       )}
 
       {results.length > 0 && (
+        <div className="mb-6 bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center gap-3">
+          <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Filtrar resultados:</label>
+          <select
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+            className="w-full sm:w-auto border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 text-black focus:border-transparent outline-none"
+          >
+            <option value="ALL">Todos os resultados</option>
+            <option value="NO_SITE">Negócio sem site próprio</option>
+            <option value="INSTAGRAM">Instagram</option>
+            <option value="WHATSAPP">WhatsApp</option>
+            <option value="SOCIAL_OTHER">Outras Redes Sociais</option>
+            <option value="WEBSITE">Site Próprio (URLs normais)</option>
+          </select>
+        </div>
+      )}
+
+      {results.length > 0 && (
         <div className="grid grid-cols-1 gap-4">
-          <h2 className="text-xl font-bold text-slate-800 mb-2">Resultados ({results.length})</h2>
-          {results.map((prospect, idx) => (
+          <h2 className="text-xl font-bold text-slate-800 mb-2">
+            Resultados ({results.filter(prospect => {
+              if (filterType === 'ALL') return true;
+              const website = (prospect.website || '').toLowerCase();
+              if (filterType === 'NO_SITE') return !website;
+              if (filterType === 'INSTAGRAM') return website.includes('instagram.com') || website.includes('@');
+              if (filterType === 'WHATSAPP') return website.includes('wa.me') || website.includes('whatsapp');
+              if (filterType === 'SOCIAL_OTHER') return website.includes('facebook.com') || website.includes('linktr.ee') || website.includes('tiktok.com') || website.includes('youtube.com') || website.includes('linkedin.com');
+              if (filterType === 'WEBSITE') return website && !website.includes('instagram.com') && !website.includes('wa.me') && !website.includes('facebook.com') && !website.includes('linktr.ee') && !website.includes('tiktok.com');
+              return true;
+            }).length})
+          </h2>
+          {results.filter(prospect => {
+              if (filterType === 'ALL') return true;
+              const website = (prospect.website || '').toLowerCase();
+              if (filterType === 'NO_SITE') return !website;
+              if (filterType === 'INSTAGRAM') return website.includes('instagram.com') || website.includes('@');
+              if (filterType === 'WHATSAPP') return website.includes('wa.me') || website.includes('whatsapp');
+              if (filterType === 'SOCIAL_OTHER') return website.includes('facebook.com') || website.includes('linktr.ee') || website.includes('tiktok.com') || website.includes('youtube.com') || website.includes('linkedin.com');
+              if (filterType === 'WEBSITE') return website && !website.includes('instagram.com') && !website.includes('wa.me') && !website.includes('facebook.com') && !website.includes('linktr.ee') && !website.includes('tiktok.com');
+              return true;
+          }).map((prospect, idx) => (
             <div key={idx} className="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-blue-300 transition">
               <div className="flex-grow">
                 <div className="flex items-center gap-3 mb-1">
