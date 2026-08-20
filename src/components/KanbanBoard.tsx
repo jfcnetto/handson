@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { updateLeadStatus } from '@/actions/lead'
 
 const FUNNEL_STAGES = [
@@ -17,6 +17,10 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
   const [leads, setLeads] = useState(initialLeads)
   const [updating, setUpdating] = useState<string | null>(null)
   const [selectedLead, setSelectedLead] = useState<any | null>(null)
+
+  useEffect(() => {
+    setLeads(initialLeads)
+  }, [initialLeads])
 
   const handleStatusChange = async (leadId: string, newStatus: string) => {
     setUpdating(leadId)

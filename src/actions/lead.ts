@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
 // Regras de Classificação (RN10) - Removido (Não usado no novo modelo)
 // Motor de Pontuação (RN05 a RN08)
@@ -101,6 +102,7 @@ export async function updateLeadStatus(leadId: string, newStatus: string) {
       where: { id: leadId },
       data: { status: newStatus }
     })
+    revalidatePath('/dashboard')
     return { success: true, lead: updated }
   } catch (err) {
     console.error("Error updating lead status:", err)
