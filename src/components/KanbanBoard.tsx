@@ -207,8 +207,8 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               rows: [
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph({ text: "Item Avaliado", bold: true })] }),
-                    new TableCell({ children: [new Paragraph({ text: "Situação Identificada", bold: true })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Item Avaliado", bold: true })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Situação Identificada", bold: true })] })] }),
                   ]
                 }),
                 new TableRow({
@@ -256,8 +256,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { after: 400 }
             }),
             new Paragraph({
-              text: "CONDIÇÕES GERAIS:",
-              bold: true,
+              children: [new TextRun({ text: "CONDIÇÕES GERAIS:", bold: true })],
               spacing: { after: 200 }
             }),
             new Paragraph({
@@ -289,9 +288,8 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { before: 1000, after: 100 }
             }),
             new Paragraph({
-              text: "Hands On! Modernização de Sistemas",
+              children: [new TextRun({ text: "Hands On! Modernização de Sistemas", bold: true })],
               alignment: AlignmentType.CENTER,
-              bold: true,
               spacing: { after: 600 }
             }),
             new Paragraph({
@@ -300,9 +298,8 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { before: 800, after: 100 }
             }),
             new Paragraph({
-              text: selectedLead.company || "Cliente",
+              children: [new TextRun({ text: selectedLead.company || "Cliente", bold: true })],
               alignment: AlignmentType.CENTER,
-              bold: true,
               spacing: { after: 100 }
             }),
             new Paragraph({
