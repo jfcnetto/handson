@@ -27,9 +27,26 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
 
   useEffect(() => {
     if (selectedLead) {
-      setDocValue(selectedLead.document || '')
+      setDocValue(selectedLead.document ? formatDocument(selectedLead.document) : '')
     }
   }, [selectedLead])
+
+  const formatDocument = (value: string) => {
+    const clean = value.replace(/\D/g, '')
+    if (clean.length <= 11) {
+      return clean
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+    } else {
+      return clean
+        .replace(/^(\d{2})(\d)/, '$1.$2')
+        .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+        .replace(/\.(\d{3})(\d)/, '.$1/$2')
+        .replace(/(\d{4})(\d{1,2})$/, '$1-$2')
+        .substring(0, 18) // Limita o tamanho ao padrão CNPJ formatado
+    }
+  }
 
   const handleSaveDocument = async () => {
     if (!selectedLead) return
@@ -420,7 +437,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
                             type="text" 
                             className="border border-slate-200 rounded px-2 py-1 flex-grow focus:outline-none focus:border-blue-400 text-sm"
                             value={docValue}
-                            onChange={(e) => setDocValue(e.target.value)}
+                            onChange={(e) => setDocValue(formatDocument(e.target.value))}
                             placeholder="000.000.000-00 ou 00.000.000/0000-00"
                           />
                           <button 
