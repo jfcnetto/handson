@@ -8,7 +8,7 @@ export const metadata = {
 export default function ModernizacaoSistemasLegadosPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Modernização de Sistemas Legados: O Guia Completo para Evoluir Seu ERP</h1>
         
         <img 
@@ -18,17 +18,29 @@ export default function ModernizacaoSistemasLegadosPage() {
         />
 
         <p>
-          Se a sua empresa ainda depende de um software desenvolvido há mais de 10 anos, você sabe bem a dor de cabeça que é mantê-lo rodando. Erros constantes, telas lentas, dificuldade de integração e a impossibilidade de trabalhar pelo celular ou fora do escritório. A solução definitiva para isso chama-se <strong>Modernização de Sistemas Legados</strong>.
+          Se a sua empresa ainda depende de um software desenvolvido há mais de 10 anos, você sabe bem a dor de cabeça que é mantê-lo rodando.
+        </p>
+        <p>
+          Erros constantes, telas lentas, dificuldade de integração e a impossibilidade de trabalhar pelo celular ou fora do escritório.
+        </p>
+        <p>
+          A solução definitiva para isso chama-se <strong>Modernização de Sistemas Legados</strong>.
         </p>
 
         <h2>O que é um Sistema Legado?</h2>
         <p>
-          No mundo da TI corporativa, chamamos de "legado" qualquer software, tecnologia ou método que já é obsoleto, mas continua sendo utilizado porque desempenha um papel crítico nos processos da empresa. Geralmente, são sistemas monolíticos, instalados em servidores físicos locais, que utilizam linguagens de programação que a maioria dos desenvolvedores atuais não conhece mais (como Delphi, VB6, Cobol, etc).
+          No mundo da TI corporativa, chamamos de "legado" qualquer software, tecnologia ou método que já é obsoleto, mas continua sendo utilizado porque desempenha um papel crítico nos processos da empresa.
+        </p>
+        <p>
+          Geralmente, são sistemas monolíticos, instalados em servidores físicos locais, que utilizam linguagens de programação que a maioria dos desenvolvedores atuais não conhece mais (como Delphi, VB6, Cobol, etc).
         </p>
 
         <h2>Por que Manter um Sistema Antigo Custa Caro?</h2>
         <p>
-          Muitos gestores adiam a modernização pensando em economia. Mas a verdade é que o sistema legado drena recursos de forma silenciosa:
+          Muitos gestores adiam a modernização pensando em economia.
+        </p>
+        <p>
+          Mas a verdade é que o sistema legado drena recursos de forma silenciosa:
         </p>
         <ul>
           <li><strong>Custo de Manutenção:</strong> Encontrar programadores experientes em linguagens antigas é raro e muito caro.</li>
@@ -39,7 +51,13 @@ export default function ModernizacaoSistemasLegadosPage() {
 
         <h2>Como Fazemos a Modernização?</h2>
         <p>
-          Substituir o coração da empresa exige planejamento rigoroso. Não acreditamos no modelo "desligue tudo hoje e ligue o novo amanhã". A abordagem correta é a modernização progressiva.
+          Substituir o coração da empresa exige planejamento rigoroso.
+        </p>
+        <p>
+          Não acreditamos no modelo "desligue tudo hoje e ligue o novo amanhã".
+        </p>
+        <p>
+          A abordagem correta é a modernização progressiva.
         </p>
         
         <img 
@@ -49,12 +67,21 @@ export default function ModernizacaoSistemasLegadosPage() {
         />
         
         <p>
-          Extraímos as regras de negócio do sistema antigo e construímos, paralelamente, um software web robusto. Esse novo software pode rodar na Nuvem (Cloud), acessível de qualquer lugar através do navegador ou celular. Realizamos a migração dos dados históricos para o novo banco de dados relacional (como PostgreSQL) sem perder nenhuma informação valiosa do passado.
+          Extraímos as regras de negócio do sistema antigo e construímos, paralelamente, um software web robusto.
+        </p>
+        <p>
+          Esse novo software pode rodar na Nuvem (Cloud), acessível de qualquer lugar através do navegador ou celular.
+        </p>
+        <p>
+          Realizamos a migração dos dados históricos para o novo banco de dados relacional (como PostgreSQL) sem perder nenhuma informação valiosa do passado.
         </p>
 
         <h2>Resultados da Evolução Digital</h2>
         <p>
-          Com a modernização, sua empresa ganha velocidade, segurança e, acima de tudo, a capacidade de inovar e criar integrações para competir com outras empresas no mercado atual. A migração tira a sua operação da "sobrevivência" e a coloca no modo "crescimento estruturado".
+          Com a modernização, sua empresa ganha velocidade, segurança e, acima de tudo, a capacidade de inovar e criar integrações para competir com outras empresas no mercado atual.
+        </p>
+        <p>
+          A migração tira a sua operação da "sobrevivência" e a coloca no modo "crescimento estruturado".
         </p>
       </article>
 

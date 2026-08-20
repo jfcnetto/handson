@@ -1,26 +1,81 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Migração de Banco de Dados | Hands On! Modernização',
-  description: 'Extração, transformação, limpeza e migração (ETL) de bancos de dados antigos ou legados para ambientes em nuvem, garantindo 100% de integridade das suas informações históricas.'
+  title: 'Migração de Banco de Dados: Como Transferir o Coração da Empresa',
+  description: 'Descubra os desafios da migração de bancos de dados legados, como limpar dados e garantir uma transição segura para nuvem sem perda de informações cruciais.',
 }
 
-export default function SEOPage() {
+export default function MigracaoBancoDadosPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Banco de Dados</h1>
-        <p className="text-xl text-slate-600 mb-12 leading-relaxed" dangerouslySetInnerHTML={{ __html: 'Extração, transformação, limpeza e migração (ETL) de bancos de dados antigos ou legados para ambientes em nuvem, garantindo 100% de integridade das suas informações históricas.' }} />
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Banco de Dados: Como Transferir o Coração da Sua Empresa</h1>
         
-        <div className="prose prose-lg text-slate-700 max-w-none">
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Protegendo o seu maior ativo</h2>
-          <p className="mb-8" dangerouslySetInnerHTML={{ __html: 'Migrar dados não é apenas copiar arquivos.<br/><br/>É garantir que décadas de informações de clientes, vendas e faturamento sejam convertidos perfeitamente para as novas estruturas de banco de dados sem qualquer divergência.' }} />
-          
-          <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4">Processo Validador</h2>
-          <p className="mb-12" dangerouslySetInnerHTML={{ __html: 'Utilizamos um processo contínuo de Profile, Cleanse, Transform, Migrate e Reconcile, gerando relatórios de reconciliação para que você tenha a prova matemática de que nada foi perdido na transição.' }} />
-        </div>
-      </div>
-      
+        <img 
+          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" 
+          alt="Servidores e painéis de dados em data center" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg mb-8"
+        />
+
+        <p>
+          O banco de dados de uma empresa é o seu ativo mais valioso, guardando o histórico completo de clientes, vendas e finanças.
+        </p>
+        <p>
+          Quando um sistema legado atinge seu limite técnico, o maior medo dos gestores é perder essas informações durante a troca de tecnologia.
+        </p>
+        <p>
+          A <strong>Migração de Banco de Dados</strong> é o processo de transferir dados de um sistema antigo (muitas vezes desestruturado) para um novo banco de dados moderno, escalável e seguro na nuvem.
+        </p>
+
+        <h2>Por que a Migração é tão Desafiadora?</h2>
+        <p>
+          Mover dados de um lugar para outro parece simples na teoria, mas na prática corporativa, é uma operação de alto risco.
+        </p>
+        <p>
+          Sistemas antigos geralmente possuem bancos de dados com arquiteturas confusas, tabelas sem padrão e regras de negócio espalhadas.
+        </p>
+        <p>
+          Muitas vezes, encontram-se dados duplicados, campos de texto misturados com números e registros órfãos que quebram as consultas.
+        </p>
+        <p>
+          Uma simples exportação descuidada pode corromper a pontuação de CPFs, bagunçar datas e destruir o relacionamento estrutural entre o cliente e os pedidos dele.
+        </p>
+
+        <h2>O Nosso Processo de Migração Segura</h2>
+        <p>
+          Não realizamos apenas a cópia dos dados brutos, nós aplicamos um processo rigoroso de ETL (Extração, Transformação e Carga).
+        </p>
+        <p>
+          Primeiro, <strong>Extraímos</strong> as informações do banco de origem (seja ele SQL antigo, Firebird, DBF ou Oracle).
+        </p>
+        <p>
+          Em seguida, <strong>Transformamos</strong> esses dados de forma cuidadosa: limpamos sujeiras, padronizamos documentos, corrigimos codificações de texto antigas (como acentos quebrados) e redesenhamos a estrutura das tabelas para o padrão relacional moderno.
+        </p>
+        <p>
+          Por fim, <strong>Carregamos</strong> o histórico purificado no novo banco de dados (como PostgreSQL hospedado em Cloud), realizando testes intensivos automatizados para garantir a integridade de todas as referências.
+        </p>
+
+        <img 
+          src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80" 
+          alt="Gráficos de dados em telas e transformação digital" 
+          className="w-full h-80 object-cover rounded-xl shadow-lg my-8"
+        />
+
+        <h2>A Garantia de Zero Inatividade</h2>
+        <p>
+          O maior receio em grandes migrações corporativas é o tempo em que a empresa precisará ficar de portas fechadas ou inoperante para a virada do sistema.
+        </p>
+        <p>
+          Nossa abordagem envolve testes de migrações em paralelo e sincronização contínua.
+        </p>
+        <p>
+          Preparamos toda a base em um ambiente de simulação, homologamos com os especialistas da sua equipe e só realizamos a virada final e definitiva em janelas de baixo acesso, como na madrugada ou aos finais de semana.
+        </p>
+        <p>
+          Ao final do processo, sua empresa herda um histórico de dados impecável, perfeitamente pronto para alimentar ferramentas de Inteligência Artificial e Dashboards executivos avançados.
+        </p>
+      </article>
+
       {/* CALL TO ACTION */}
       <section className="py-20 bg-slate-50 border-t border-slate-200 mt-12 text-center">
         <div className="max-w-3xl mx-auto px-4">

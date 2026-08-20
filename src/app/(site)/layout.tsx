@@ -14,7 +14,6 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
             </div>
             <nav className="hidden md:flex space-x-8 items-center">
               <Link href="/" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Início</Link>
-              <Link href="/sobre" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Sobre Nós</Link>
               
               <div className="relative group py-2">
                 <button className="text-slate-600 group-hover:text-blue-600 font-medium text-sm transition-colors flex items-center gap-1">
@@ -33,6 +32,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
 
               <Link href="/engenharia-reversa-software" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Engenharia Reversa</Link>
               <Link href="/contato" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Contato</Link>
+              <Link href="/sobre" className="text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors">Sobre Nós</Link>
             </nav>
             <div className="flex items-center">
               <Link href="/diagnostico" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm">

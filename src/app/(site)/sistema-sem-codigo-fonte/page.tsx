@@ -8,7 +8,7 @@ export const metadata = {
 export default function SistemaSemCodigoFontePage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Como Manter e Evoluir um Sistema Sem Código-Fonte</h1>
         
         <img 
@@ -18,12 +18,21 @@ export default function SistemaSemCodigoFontePage() {
         />
 
         <p>
-          Um dos maiores pesadelos para qualquer gestor de TI é descobrir que o sistema principal da empresa está rodando, mas o <strong>código-fonte original foi perdido</strong>. Seja porque o desenvolvedor saiu da empresa, a software house terceirizada faliu ou simplesmente porque não houve controle de versão (como Git) ao longo dos anos.
+          Um dos maiores pesadelos para qualquer gestor de TI é descobrir que o sistema principal da empresa está rodando, mas o <strong>código-fonte original foi perdido</strong>.
+        </p>
+        <p>
+          Seja porque o desenvolvedor saiu da empresa, a software house terceirizada faliu ou simplesmente porque não houve controle de versão (como Git) ao longo dos anos.
         </p>
 
         <h2>O Risco de Operar Sem Código-Fonte</h2>
         <p>
-          O código-fonte é a "receita do bolo" de um software. Sem ele, você possui apenas o bolo já assado (o executável final). Operar dessa maneira traz riscos críticos:
+          O código-fonte é a "receita do bolo" de um software.
+        </p>
+        <p>
+          Sem ele, você possui apenas o bolo já assado (o executável final).
+        </p>
+        <p>
+          Operar dessa maneira traz riscos críticos:
         </p>
         <ul>
           <li><strong>Impossibilidade de Manutenção:</strong> Se uma nova lei tributária exigir uma mudança no cálculo de impostos do sistema, você não consegue alterá-lo.</li>
@@ -33,7 +42,10 @@ export default function SistemaSemCodigoFontePage() {
 
         <h2>Qual é a Solução?</h2>
         <p>
-          A solução definitiva é recriar o sistema. No entanto, recriar um sistema complexo "do zero" contando apenas com a memória dos funcionários costuma resultar em fracasso, pois muitas regras de negócios ocultas acabam esquecidas.
+          A solução definitiva é recriar o sistema.
+        </p>
+        <p>
+          No entanto, recriar um sistema complexo "do zero" contando apenas com a memória dos funcionários costuma resultar em fracasso, pois muitas regras de negócios ocultas acabam esquecidas.
         </p>
         
         <img 
@@ -44,7 +56,10 @@ export default function SistemaSemCodigoFontePage() {
 
         <h2>A Abordagem Técnica da Hands On!</h2>
         <p>
-          Nós utilizamos técnicas de <strong>Engenharia Reversa</strong> focadas em observar a "Caixa Preta". Em vez de tentar descompilar executáveis antigos (o que raramente gera um código legível), nós:
+          Nós utilizamos técnicas de <strong>Engenharia Reversa</strong> focadas em observar a "Caixa Preta".
+        </p>
+        <p>
+          Em vez de tentar descompilar executáveis antigos (o que raramente gera um código legível), nós:
         </p>
         <ol>
           <li>Mapeamos o banco de dados existente (que geralmente continua acessível, como um SQL Server ou Firebird antigo).</li>
@@ -55,7 +70,10 @@ export default function SistemaSemCodigoFontePage() {
 
         <h2>Recupere a Propriedade Intelectual da sua Empresa</h2>
         <p>
-          Mais do que apenas um novo software, o processo devolve à sua empresa a posse da própria tecnologia. Ao final da reconstrução, você recebe o sistema moderno completo, documentado e com repositório de código-fonte devidamente versionado sob sua propriedade exclusiva, garantindo que o pesadelo nunca se repita.
+          Mais do que apenas um novo software, o processo devolve à sua empresa a posse da própria tecnologia.
+        </p>
+        <p>
+          Ao final da reconstrução, você recebe o sistema moderno completo, documentado e com repositório de código-fonte devidamente versionado sob sua propriedade exclusiva, garantindo que o pesadelo nunca se repita.
         </p>
       </article>
 

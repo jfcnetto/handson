@@ -8,7 +8,7 @@ export const metadata = {
 export default function MigracaoAccessPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Migração de Microsoft Access para Sistemas Web Modernos</h1>
         
         <img 
@@ -18,7 +18,13 @@ export default function MigracaoAccessPage() {
         />
 
         <p>
-          O <strong>Microsoft Access</strong> foi uma das ferramentas de banco de dados mais populares das décadas passadas. Ele permitiu que milhares de empresas automatizassem fluxos internos rapidamente. Contudo, negócios crescem e o Access não foi desenhado para lidar com cenários de grande volume de dados ou múltiplos acessos simultâneos.
+          O <strong>Microsoft Access</strong> foi uma das ferramentas de banco de dados mais populares das décadas passadas.
+        </p>
+        <p>
+          Ele permitiu que milhares de empresas automatizassem fluxos internos rapidamente.
+        </p>
+        <p>
+          Contudo, negócios crescem e o Access não foi desenhado para lidar com cenários de grande volume de dados ou múltiplos acessos simultâneos.
         </p>
 
         <h2>Os Limites Fatais do Access</h2>
@@ -33,7 +39,10 @@ export default function MigracaoAccessPage() {
 
         <h2>O Caminho para a Nuvem</h2>
         <p>
-          O processo de <strong>Migração de Access</strong> consiste em separar o que é dado (banco de dados) do que é comportamento (telas e formulários), e substituí-los por soluções modernas. A migração resolve todos os problemas de limite do Access de uma só vez, movendo seu sistema para tecnologias utilizadas pelas maiores empresas do mundo.
+          O processo de <strong>Migração de Access</strong> consiste em separar o que é dado (banco de dados) do que é comportamento (telas e formulários), e substituí-los por soluções modernas.
+        </p>
+        <p>
+          A migração resolve todos os problemas de limite do Access de uma só vez, movendo seu sistema para tecnologias utilizadas pelas maiores empresas do mundo.
         </p>
         
         <img 
@@ -54,7 +63,13 @@ export default function MigracaoAccessPage() {
 
         <h2>Vantagens da Modernização de Access</h2>
         <p>
-          Migrando para tecnologias web, sua empresa passa a ter acessos ilimitados simultâneos sem travamentos. O limite de dados torna-se flexível, crescendo conforme o negócio. Além disso, backups automatizados garantem que você nunca mais precisará se preocupar com a corrupção do arquivo <em>.mdb</em>.
+          Migrando para tecnologias web, sua empresa passa a ter acessos ilimitados simultâneos sem travamentos.
+        </p>
+        <p>
+          O limite de dados torna-se flexível, crescendo conforme o negócio.
+        </p>
+        <p>
+          Além disso, backups automatizados garantem que você nunca mais precisará se preocupar com a corrupção do arquivo <em>.mdb</em>.
         </p>
       </article>
 

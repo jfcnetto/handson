@@ -8,7 +8,7 @@ export const metadata = {
 export default function EngenhariaReversaPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Engenharia Reversa de Software: Como Recuperar o Controle do Seu Sistema</h1>
         
         <img 
@@ -18,12 +18,21 @@ export default function EngenhariaReversaPage() {
         />
 
         <p>
-          Em muitas empresas, sistemas críticos operam há anos sem que a equipe atual entenda exatamente como eles funcionam por baixo dos panos. Com a rotatividade de desenvolvedores e a falta de documentação, o conhecimento se perde. É aqui que entra a <strong>Engenharia Reversa de Software</strong>.
+          Em muitas empresas, sistemas críticos operam há anos sem que a equipe atual entenda exatamente como eles funcionam por baixo dos panos.
+        </p>
+        <p>
+          Com a rotatividade de desenvolvedores e a falta de documentação, o conhecimento se perde.
+        </p>
+        <p>
+          É aqui que entra a <strong>Engenharia Reversa de Software</strong>.
         </p>
 
         <h2>O que é Engenharia Reversa de Software?</h2>
         <p>
-          A engenharia reversa de software é o processo de analisar um sistema existente (seja um executável, um banco de dados legado ou uma aplicação em produção) para identificar seus componentes, dependências e lógicas de negócios. O objetivo é recriar a documentação ou até mesmo um novo código-fonte a partir do comportamento observado.
+          A engenharia reversa de software é o processo de analisar um sistema existente (seja um executável, um banco de dados legado ou uma aplicação em produção) para identificar seus componentes, dependências e lógicas de negócios.
+        </p>
+        <p>
+          O objetivo é recriar a documentação ou até mesmo um novo código-fonte a partir do comportamento observado.
         </p>
         <p>
           Na prática corporativa, isso não significa "hackear" o sistema, mas sim compreendê-lo profundamente para que ele possa ser mantido, atualizado ou migrado para tecnologias web e cloud sem que regras de negócios cruciais sejam esquecidas.
@@ -39,7 +48,10 @@ export default function EngenhariaReversaPage() {
 
         <h2>Como Funciona o Processo na Prática?</h2>
         <p>
-          O processo começa pela análise do comportamento do software (chamada de <em>Black-box testing</em> ou teste de caixa-preta) e pela interceptação rigorosa de todas as comunicações que a aplicação faz com o banco de dados. Nossa equipe mapeia as tabelas, os fluxos de dados e as regras exatas que o sistema aplica a cada clique do usuário.
+          O processo começa pela análise do comportamento do software (chamada de <em>Black-box testing</em> ou teste de caixa-preta) e pela interceptação rigorosa de todas as comunicações que a aplicação faz com o banco de dados.
+        </p>
+        <p>
+          Nossa equipe mapeia as tabelas, os fluxos de dados e as regras exatas que o sistema aplica a cada clique do usuário.
         </p>
         
         <img 
@@ -49,12 +61,21 @@ export default function EngenhariaReversaPage() {
         />
         
         <p>
-          Com essas informações detalhadas em mãos, construímos uma <strong>Especificação Funcional Completa</strong>. A partir desse documento, sua empresa tem o poder de decidir os próximos passos de forma segura: manter o sistema atual com integrações modernas, ou reescrevê-lo do zero usando linguagens web atuais e seguras.
+          Com essas informações detalhadas em mãos, construímos uma <strong>Especificação Funcional Completa</strong>.
+        </p>
+        <p>
+          A partir desse documento, sua empresa tem o poder de decidir os próximos passos de forma segura: manter o sistema atual com integrações modernas, ou reescrevê-lo do zero usando linguagens web atuais e seguras.
         </p>
 
         <h2>Os Benefícios para o Seu Negócio</h2>
         <p>
-          Ao aplicar a engenharia reversa, a principal vitória é a redução drástica do <strong>Risco Tecnológico</strong>. Um sistema não documentado é uma bomba-relógio corporativa: se o servidor antigo falhar ou uma atualização do Windows quebrar a aplicação, a operação da empresa pode parar completamente. Documentar o comportamento do software garante que a operação continuará segura e escalável para o futuro.
+          Ao aplicar a engenharia reversa, a principal vitória é a redução drástica do <strong>Risco Tecnológico</strong>.
+        </p>
+        <p>
+          Um sistema não documentado é uma bomba-relógio corporativa: se o servidor antigo falhar ou uma atualização do Windows quebrar a aplicação, a operação da empresa pode parar completamente.
+        </p>
+        <p>
+          Documentar o comportamento do software garante que a operação continuará segura e escalável para o futuro.
         </p>
       </article>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DiagnosticoForm from '@/components/DiagnosticoForm'
 
 export default function HomePage() {
   return (
@@ -53,14 +54,8 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-16 text-center flex flex-col items-center">
-            <Link href="/diagnostico" className="inline-flex items-center text-blue-600 font-bold text-lg hover:text-blue-800 transition-colors">
-              Descubra o risco do seu sistema 
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </Link>
-            <p className="mt-4 text-sm text-slate-500 font-medium">
-              Avaliação inicial em aproximadamente 5 minutos.
-            </p>
+          <div className="mt-20">
+            <DiagnosticoForm />
           </div>
         </div>
       </section>

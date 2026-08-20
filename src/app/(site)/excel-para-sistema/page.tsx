@@ -8,7 +8,7 @@ export const metadata = {
 export default function ExcelParaSistemaPage() {
   return (
     <div className="bg-white min-h-screen pt-16">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-lg prose-blue">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 prose prose-lg prose-blue">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-6">Transformação de Excel para Software Web Corporativo</h1>
         
         <img 
@@ -18,12 +18,21 @@ export default function ExcelParaSistemaPage() {
         />
 
         <p>
-          Toda grande empresa tem aquele funcionário ou setor que construiu uma "super planilha". Ela faz de tudo: cálculos complexos, gestão de estoque, projeções financeiras e envio de alertas. No entanto, quando <strong>o Excel se torna o ERP principal de um processo crítico</strong>, os riscos operacionais se multiplicam de forma alarmante.
+          Toda grande empresa tem aquele funcionário ou setor que construiu uma "super planilha".
+        </p>
+        <p>
+          Ela faz de tudo: cálculos complexos, gestão de estoque, projeções financeiras e envio de alertas.
+        </p>
+        <p>
+          No entanto, quando <strong>o Excel se torna o ERP principal de um processo crítico</strong>, os riscos operacionais se multiplicam de forma alarmante.
         </p>
 
         <h2>Quando o Excel se Torna um Perigo</h2>
         <p>
-          O Microsoft Excel é a ferramenta de produtividade mais brilhante já inventada, mas ele não foi desenhado para atuar como o coração corporativo de uma empresa. O uso indevido de planilhas traz problemas estruturais:
+          O Microsoft Excel é a ferramenta de produtividade mais brilhante já inventada, mas ele não foi desenhado para atuar como o coração corporativo de uma empresa.
+        </p>
+        <p>
+          O uso indevido de planilhas traz problemas estruturais:
         </p>
         <ul>
           <li><strong>Versões Conflitantes:</strong> A planilha "Controle_Final_v3_Revisada.xlsx" circula por e-mail e ninguém sabe quem possui os dados mais atualizados.</li>
@@ -34,7 +43,10 @@ export default function ExcelParaSistemaPage() {
 
         <h2>O Caminho da Transformação Digital</h2>
         <p>
-          A solução não é abandonar a lógica construída durante anos no Excel, mas sim <strong>transformá-la em um Sistema Web</strong>. Ao converter planilhas para um software corporativo estruturado, o conhecimento do negócio é transferido para um código seguro, organizado e escalável.
+          A solução não é abandonar a lógica construída durante anos no Excel, mas sim <strong>transformá-la em um Sistema Web</strong>.
+        </p>
+        <p>
+          Ao converter planilhas para um software corporativo estruturado, o conhecimento do negócio é transferido para um código seguro, organizado e escalável.
         </p>
 
         <img 
@@ -56,7 +68,13 @@ export default function ExcelParaSistemaPage() {
 
         <h2>Vantagens Imediatas</h2>
         <p>
-          Transformar Excel em sistema próprio permite que vários funcionários trabalhem no mesmo dado simultaneamente, sem travar o arquivo. Elimina-se o risco de perder planilhas cruciais. É o primeiro e mais importante passo para a automação e escalabilidade da sua operação.
+          Transformar Excel em sistema próprio permite que vários funcionários trabalhem no mesmo dado simultaneamente, sem travar o arquivo.
+        </p>
+        <p>
+          Elimina-se o risco de perder planilhas cruciais.
+        </p>
+        <p>
+          É o primeiro e mais importante passo para a automação e escalabilidade da sua operação.
         </p>
       </article>
 
