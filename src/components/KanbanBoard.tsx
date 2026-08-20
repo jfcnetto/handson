@@ -79,10 +79,27 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
     const currentDate = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })
 
     let logoBuffer = null
+    let logoWidth = 200
+    let logoHeight = 100
     try {
       const res = await fetch('/logo.png')
       if (res.ok) {
         logoBuffer = await res.arrayBuffer()
+        
+        // Pega as proporções exatas da imagem usando o browser
+        const blob = new Blob([logoBuffer])
+        const url = URL.createObjectURL(blob)
+        const img = new window.Image()
+        img.src = url
+        await new Promise((resolve) => {
+          img.onload = () => {
+            const ratio = img.naturalWidth / img.naturalHeight
+            logoWidth = 200
+            logoHeight = 200 / ratio
+            resolve(true)
+          }
+          img.onerror = () => resolve(false)
+        })
       }
     } catch (e) {
       console.log("Logo fetch failed", e)
@@ -96,7 +113,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
           children: [
             new ImageRun({
               data: logoBuffer,
-              transformation: { width: 250, height: 100 },
+              transformation: { width: logoWidth, height: logoHeight },
             }),
           ],
           spacing: { after: 1000 }
@@ -104,41 +121,53 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
       )
     }
 
+    const brandColor = "1A365D"
+    const accentColor = "2563EB"
+
     const doc = new Document({
+      creator: "Hands On!",
+      title: "Proposta Comercial",
+      styles: {
+        default: {
+          document: {
+            run: { font: "Arial", size: 24, color: "333333" }
+          }
+        }
+      },
       sections: [
         {
           properties: { type: SectionType.NEXT_PAGE },
           children: [
+            new Paragraph({ spacing: { before: 2000 } }),
             ...headerParagraphs,
             new Paragraph({
-              text: "PROPOSTA DE PRESTAÇÃO DE SERVIÇOS TÉCNICOS",
-              heading: HeadingLevel.TITLE,
+              children: [new TextRun({ text: "PROPOSTA DE PRESTAÇÃO DE SERVIÇOS TÉCNICOS", color: brandColor, bold: true, size: 36 })],
               alignment: AlignmentType.CENTER,
               spacing: { before: 800, after: 1200 },
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "PARA: ", bold: true, size: 28 }),
+                new TextRun({ text: "PARA: ", bold: true, size: 28, color: brandColor }),
                 new TextRun({ text: selectedLead.company || "Não informado", size: 28 }),
               ],
               spacing: { after: 300 }
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "A/C: ", bold: true, size: 24 }),
+                new TextRun({ text: "A/C: ", bold: true, size: 24, color: brandColor }),
                 new TextRun({ text: selectedLead.name || "Não informado", size: 24 }),
               ],
               spacing: { after: 300 }
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "DOCUMENTO (CPF/CNPJ): ", bold: true, size: 24 }),
+                new TextRun({ text: "DOCUMENTO (CPF/CNPJ): ", bold: true, size: 24, color: brandColor }),
                 new TextRun({ text: selectedLead.document || docValue || "Não informado", size: 24 }),
               ],
               spacing: { after: 800 }
             }),
             new Paragraph({
-              text: `Data: ${currentDate}`,
+              children: [new TextRun({ text: `Data: ${currentDate}`, italics: true })],
               alignment: AlignmentType.RIGHT,
               spacing: { after: 1200 }
             }),
@@ -148,8 +177,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
           properties: { type: SectionType.NEXT_PAGE },
           children: [
             new Paragraph({
-              text: "1. APRESENTAÇÃO E OBJETIVO",
-              heading: HeadingLevel.HEADING_1,
+              children: [new TextRun({ text: "1. APRESENTAÇÃO E OBJETIVO", color: brandColor, bold: true, size: 32 })],
               spacing: { before: 400, after: 300 }
             }),
             new Paragraph({
@@ -159,14 +187,13 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
             new Paragraph({
               children: [
                 new TextRun("O principal objetivo deste projeto é atuar sobre o sistema alvo identificado como "),
-                new TextRun({ text: selectedLead.targetSystem || "Não especificado", bold: true }),
+                new TextRun({ text: selectedLead.targetSystem || "Não especificado", bold: true, color: accentColor }),
                 new TextRun(", mitigando riscos operacionais e garantindo a continuidade do negócio através de uma nova arquitetura moderna e escalável."),
               ],
               spacing: { after: 600 }
             }),
             new Paragraph({
-              text: "2. METODOLOGIA DE TRABALHO",
-              heading: HeadingLevel.HEADING_1,
+              children: [new TextRun({ text: "2. METODOLOGIA DE TRABALHO", color: brandColor, bold: true, size: 32 })],
               spacing: { before: 400, after: 300 }
             }),
             new Paragraph({
@@ -198,41 +225,48 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { after: 600 }
             }),
             new Paragraph({
-              text: "3. ESCOPO TÉCNICO BASE",
-              heading: HeadingLevel.HEADING_1,
+              children: [new TextRun({ text: "3. ESCOPO TÉCNICO BASE", color: brandColor, bold: true, size: 32 })],
               spacing: { before: 400, after: 300 }
             }),
             new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
+              borders: {
+                top: { style: BorderStyle.SINGLE, size: 1, color: brandColor },
+                bottom: { style: BorderStyle.SINGLE, size: 1, color: brandColor },
+                left: { style: BorderStyle.SINGLE, size: 1, color: brandColor },
+                right: { style: BorderStyle.SINGLE, size: 1, color: brandColor },
+                insideHorizontal: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                insideVertical: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+              },
               rows: [
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Item Avaliado", bold: true })] })] }),
-                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Situação Identificada", bold: true })] })] }),
+                    new TableCell({ shading: { fill: brandColor }, margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph({ children: [new TextRun({ text: "Item Avaliado", bold: true, color: "FFFFFF" })] })] }),
+                    new TableCell({ shading: { fill: brandColor }, margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph({ children: [new TextRun({ text: "Situação Identificada", bold: true, color: "FFFFFF" })] })] }),
                   ]
                 }),
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph("Tecnologia Atual")] }),
-                    new TableCell({ children: [new Paragraph(selectedLead.technology || "Não informado")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph("Tecnologia Atual")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph(selectedLead.technology || "Não informado")] }),
                   ]
                 }),
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph("Banco de Dados Atual")] }),
-                    new TableCell({ children: [new Paragraph(selectedLead.database || "Não informado")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph("Banco de Dados Atual")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph(selectedLead.database || "Não informado")] }),
                   ]
                 }),
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph("Possui Código-fonte")] }),
-                    new TableCell({ children: [new Paragraph(selectedLead.hasSourceCode || "Não informado")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph("Possui Código-fonte")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph(selectedLead.hasSourceCode || "Não informado")] }),
                   ]
                 }),
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph("Possui Documentação")] }),
-                    new TableCell({ children: [new Paragraph(selectedLead.documentation || "Não informado")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph("Possui Documentação")] }),
+                    new TableCell({ margins: { top: 100, bottom: 100, left: 100, right: 100 }, children: [new Paragraph(selectedLead.documentation || "Não informado")] }),
                   ]
                 }),
               ]
@@ -243,20 +277,19 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
           properties: { type: SectionType.NEXT_PAGE },
           children: [
             new Paragraph({
-              text: "4. INVESTIMENTO E PRAZOS",
-              heading: HeadingLevel.HEADING_1,
+              children: [new TextRun({ text: "4. INVESTIMENTO E PRAZOS", color: brandColor, bold: true, size: 32 })],
               spacing: { before: 400, after: 300 }
             }),
             new Paragraph({
               children: [
                 new TextRun("O valor total estimado para a execução dos serviços descritos é de "),
-                new TextRun({ text: formattedValue, bold: true }),
+                new TextRun({ text: formattedValue, bold: true, color: accentColor, size: 28 }),
                 new TextRun(". Este investimento contempla todas as fases (Diagnóstico, Arquitetura, Desenvolvimento e Implantação)."),
               ],
               spacing: { after: 400 }
             }),
             new Paragraph({
-              children: [new TextRun({ text: "CONDIÇÕES GERAIS:", bold: true })],
+              children: [new TextRun({ text: "CONDIÇÕES GERAIS:", bold: true, color: brandColor })],
               spacing: { after: 200 }
             }),
             new Paragraph({
@@ -274,8 +307,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { after: 600 }
             }),
             new Paragraph({
-              text: "5. TERMO DE CONFIDENCIALIDADE (NDA) E ASSINATURAS",
-              heading: HeadingLevel.HEADING_1,
+              children: [new TextRun({ text: "5. TERMO DE CONFIDENCIALIDADE (NDA) E ASSINATURAS", color: brandColor, bold: true, size: 32 })],
               spacing: { before: 400, after: 300 }
             }),
             new Paragraph({
@@ -288,7 +320,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { before: 1000, after: 100 }
             }),
             new Paragraph({
-              children: [new TextRun({ text: "Hands On! Modernização de Sistemas", bold: true })],
+              children: [new TextRun({ text: "Hands On! Modernização de Sistemas", bold: true, color: brandColor })],
               alignment: AlignmentType.CENTER,
               spacing: { after: 600 }
             }),
@@ -298,12 +330,12 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
               spacing: { before: 800, after: 100 }
             }),
             new Paragraph({
-              children: [new TextRun({ text: selectedLead.company || "Cliente", bold: true })],
+              children: [new TextRun({ text: selectedLead.company || "Cliente", bold: true, color: brandColor })],
               alignment: AlignmentType.CENTER,
               spacing: { after: 100 }
             }),
             new Paragraph({
-              text: selectedLead.name || "Representante",
+              children: [new TextRun({ text: selectedLead.name || "Representante" })],
               alignment: AlignmentType.CENTER,
             }),
           ]
