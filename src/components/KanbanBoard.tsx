@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { updateLeadStatus, updateLeadDocument } from '@/actions/lead'
-import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx'
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Table, TableRow, TableCell, BorderStyle, WidthType, ImageRun, SectionType } from 'docx'
 import { saveAs } from 'file-saver'
 
 const FUNNEL_STAGES = [
@@ -59,75 +59,246 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
 
     const proposalValue = estMax * 0.87
     const formattedValue = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(proposalValue)
+    const currentDate = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })
+
+    let logoBuffer = null
+    try {
+      const res = await fetch('/logo.png')
+      if (res.ok) {
+        logoBuffer = await res.arrayBuffer()
+      }
+    } catch (e) {
+      console.log("Logo fetch failed", e)
+    }
+
+    const headerParagraphs = []
+    if (logoBuffer) {
+      headerParagraphs.push(
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [
+            new ImageRun({
+              data: logoBuffer,
+              transformation: { width: 250, height: 100 },
+            }),
+          ],
+          spacing: { after: 1000 }
+        })
+      )
+    }
 
     const doc = new Document({
-      sections: [{
-        properties: {},
-        children: [
-          new Paragraph({
-            text: "PROPOSTA COMERCIAL",
-            heading: HeadingLevel.TITLE,
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 400 }
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: "Cliente: ", bold: true }),
-              new TextRun(selectedLead.company || "Não informado"),
-            ],
-            spacing: { after: 200 }
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: "Contato: ", bold: true }),
-              new TextRun(selectedLead.name || "Não informado"),
-            ],
-            spacing: { after: 200 }
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({ text: "CPF/CNPJ: ", bold: true }),
-              new TextRun(selectedLead.document || docValue || "Não informado"),
-            ],
-            spacing: { after: 400 }
-          }),
-          new Paragraph({
-            text: "1. OBJETIVO",
-            heading: HeadingLevel.HEADING_1,
-            spacing: { before: 200, after: 200 }
-          }),
-          new Paragraph({
-            text: `Modernização e engenharia reversa do sistema alvo: ${selectedLead.targetSystem || "Não especificado"}.`,
-            spacing: { after: 400 }
-          }),
-          new Paragraph({
-            text: "2. ESCOPO TÉCNICO RESUMIDO",
-            heading: HeadingLevel.HEADING_1,
-            spacing: { before: 200, after: 200 }
-          }),
-          new Paragraph({
-            text: `Tecnologia Atual: ${selectedLead.technology || "Não informado"}\nBanco de Dados: ${selectedLead.database || "Não informado"}\nPossui Código-fonte: ${selectedLead.hasSourceCode || "Não informado"}`,
-            spacing: { after: 400 }
-          }),
-          new Paragraph({
-            text: "3. INVESTIMENTO",
-            heading: HeadingLevel.HEADING_1,
-            spacing: { before: 200, after: 200 }
-          }),
-          new Paragraph({
-            children: [
-              new TextRun("O valor total estimado para a execução dos serviços descritos é de "),
-              new TextRun({ text: formattedValue, bold: true }),
-              new TextRun(". Este valor já inclui todas as fases de diagnóstico profundo, modernização e entrega da nova arquitetura."),
-            ],
-            spacing: { after: 400 }
-          }),
-        ],
-      }]
+      sections: [
+        {
+          properties: { type: SectionType.NEXT_PAGE },
+          children: [
+            ...headerParagraphs,
+            new Paragraph({
+              text: "PROPOSTA DE PRESTAÇÃO DE SERVIÇOS TÉCNICOS",
+              heading: HeadingLevel.TITLE,
+              alignment: AlignmentType.CENTER,
+              spacing: { before: 800, after: 1200 },
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "PARA: ", bold: true, size: 28 }),
+                new TextRun({ text: selectedLead.company || "Não informado", size: 28 }),
+              ],
+              spacing: { after: 300 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "A/C: ", bold: true, size: 24 }),
+                new TextRun({ text: selectedLead.name || "Não informado", size: 24 }),
+              ],
+              spacing: { after: 300 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "DOCUMENTO (CPF/CNPJ): ", bold: true, size: 24 }),
+                new TextRun({ text: selectedLead.document || docValue || "Não informado", size: 24 }),
+              ],
+              spacing: { after: 800 }
+            }),
+            new Paragraph({
+              text: `Data: ${currentDate}`,
+              alignment: AlignmentType.RIGHT,
+              spacing: { after: 1200 }
+            }),
+          ],
+        },
+        {
+          properties: { type: SectionType.NEXT_PAGE },
+          children: [
+            new Paragraph({
+              text: "1. APRESENTAÇÃO E OBJETIVO",
+              heading: HeadingLevel.HEADING_1,
+              spacing: { before: 400, after: 300 }
+            }),
+            new Paragraph({
+              text: "A Hands On! apresenta esta proposta técnica e comercial visando a prestação de serviços especializados em Modernização de Sistemas Legados e Engenharia Reversa de Software.",
+              spacing: { after: 200 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun("O principal objetivo deste projeto é atuar sobre o sistema alvo identificado como "),
+                new TextRun({ text: selectedLead.targetSystem || "Não especificado", bold: true }),
+                new TextRun(", mitigando riscos operacionais e garantindo a continuidade do negócio através de uma nova arquitetura moderna e escalável."),
+              ],
+              spacing: { after: 600 }
+            }),
+            new Paragraph({
+              text: "2. METODOLOGIA DE TRABALHO",
+              heading: HeadingLevel.HEADING_1,
+              spacing: { before: 400, after: 300 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "• Fase 1: Diagnóstico e Descoberta - ", bold: true }),
+                new TextRun("Mapeamento completo das regras de negócio, fluxos e rotinas do sistema atual."),
+              ],
+              spacing: { after: 200 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "• Fase 2: Arquitetura e Engenharia Reversa - ", bold: true }),
+                new TextRun("Desenho da nova solução tecnológica e documentação da estrutura de dados."),
+              ],
+              spacing: { after: 200 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "• Fase 3: Desenvolvimento e Testes - ", bold: true }),
+                new TextRun("Construção modular do novo sistema na pilha tecnológica aprovada e homologação rigorosa."),
+              ],
+              spacing: { after: 200 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "• Fase 4: Implantação e Treinamento - ", bold: true }),
+                new TextRun("Go-live acompanhado, migração de dados final e capacitação da equipe técnica e operacional do cliente."),
+              ],
+              spacing: { after: 600 }
+            }),
+            new Paragraph({
+              text: "3. ESCOPO TÉCNICO BASE",
+              heading: HeadingLevel.HEADING_1,
+              spacing: { before: 400, after: 300 }
+            }),
+            new Table({
+              width: { size: 100, type: WidthType.PERCENTAGE },
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph({ text: "Item Avaliado", bold: true })] }),
+                    new TableCell({ children: [new Paragraph({ text: "Situação Identificada", bold: true })] }),
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph("Tecnologia Atual")] }),
+                    new TableCell({ children: [new Paragraph(selectedLead.technology || "Não informado")] }),
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph("Banco de Dados Atual")] }),
+                    new TableCell({ children: [new Paragraph(selectedLead.database || "Não informado")] }),
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph("Possui Código-fonte")] }),
+                    new TableCell({ children: [new Paragraph(selectedLead.hasSourceCode || "Não informado")] }),
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({ children: [new Paragraph("Possui Documentação")] }),
+                    new TableCell({ children: [new Paragraph(selectedLead.documentation || "Não informado")] }),
+                  ]
+                }),
+              ]
+            }),
+          ]
+        },
+        {
+          properties: { type: SectionType.NEXT_PAGE },
+          children: [
+            new Paragraph({
+              text: "4. INVESTIMENTO E PRAZOS",
+              heading: HeadingLevel.HEADING_1,
+              spacing: { before: 400, after: 300 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun("O valor total estimado para a execução dos serviços descritos é de "),
+                new TextRun({ text: formattedValue, bold: true }),
+                new TextRun(". Este investimento contempla todas as fases (Diagnóstico, Arquitetura, Desenvolvimento e Implantação)."),
+              ],
+              spacing: { after: 400 }
+            }),
+            new Paragraph({
+              text: "CONDIÇÕES GERAIS:",
+              bold: true,
+              spacing: { after: 200 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "• Forma de Pagamento: ", bold: true }),
+                new TextRun("A combinar, sugerido faturamento parcelado vinculado à entrega de marcos (Milestones) do projeto."),
+              ],
+              spacing: { after: 200 }
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "• Validade da Proposta: ", bold: true }),
+                new TextRun("15 dias contados a partir da data de emissão."),
+              ],
+              spacing: { after: 600 }
+            }),
+            new Paragraph({
+              text: "5. TERMO DE CONFIDENCIALIDADE (NDA) E ASSINATURAS",
+              heading: HeadingLevel.HEADING_1,
+              spacing: { before: 400, after: 300 }
+            }),
+            new Paragraph({
+              text: "A Hands On! compromete-se a manter em absoluto sigilo e confidencialidade todas as informações operacionais, estratégicas, banco de dados e regras de negócio do cliente, comprometendo-se a utilizá-las unicamente para os fins desta proposta de prestação de serviços.",
+              spacing: { after: 800 }
+            }),
+            new Paragraph({
+              text: "_______________________________________________________",
+              alignment: AlignmentType.CENTER,
+              spacing: { before: 1000, after: 100 }
+            }),
+            new Paragraph({
+              text: "Hands On! Modernização de Sistemas",
+              alignment: AlignmentType.CENTER,
+              bold: true,
+              spacing: { after: 600 }
+            }),
+            new Paragraph({
+              text: "_______________________________________________________",
+              alignment: AlignmentType.CENTER,
+              spacing: { before: 800, after: 100 }
+            }),
+            new Paragraph({
+              text: selectedLead.company || "Cliente",
+              alignment: AlignmentType.CENTER,
+              bold: true,
+              spacing: { after: 100 }
+            }),
+            new Paragraph({
+              text: selectedLead.name || "Representante",
+              alignment: AlignmentType.CENTER,
+            }),
+          ]
+        }
+      ]
     })
 
     const blob = await Packer.toBlob(doc)
-    saveAs(blob, `Proposta_${selectedLead.company.replace(/\s+/g, '_')}.docx`)
+    saveAs(blob, `Proposta_${selectedLead.company?.replace(/\s+/g, '_') || 'Comercial'}.docx`)
   }
 
   const handleStatusChange = async (leadId: string, newStatus: string) => {
