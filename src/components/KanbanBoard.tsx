@@ -174,6 +174,7 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
             new ImageRun({
               data: logoBuffer,
               transformation: { width: logoWidth, height: logoHeight },
+              type: "png"
             }),
           ],
           spacing: { after: 1000 }
