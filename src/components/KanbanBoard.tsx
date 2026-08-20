@@ -38,6 +38,9 @@ export default function KanbanBoard({ initialLeads, pricingTiers = [] }: { initi
     if (res.success) {
       setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, document: docValue } : l))
       setSelectedLead({ ...selectedLead, document: docValue })
+      alert("Documento salvo com sucesso!")
+    } else {
+      alert("Erro ao salvar documento: " + (res.error || "Erro desconhecido"))
     }
     setUpdating(null)
   }
