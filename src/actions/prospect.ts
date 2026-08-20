@@ -78,8 +78,8 @@ export async function addProspectToFunnel(prospect: ProspectResult, prospectReas
       data: {
         name: "Responsável", // Como o Maps não dá o nome do dono, colocamos genérico
         company: prospect.name,
-        email: prospect.mockedEmail || `${prospect.name.toLowerCase().replace(/\s/g, '')}@example.com`,
-        phone: prospect.phone,
+        email: prospect.mockedEmail || `${prospect.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '')}_${Date.now()}@example.com`,
+        phone: prospect.phone || null,
         status: 'NEW',
         targetSystem: prospect.website || 'Sem site próprio',
         motivation: prospectReason,
