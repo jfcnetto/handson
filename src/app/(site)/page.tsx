@@ -24,8 +24,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="lg:w-1/2 mt-12 lg:mt-0 relative">
-            <div className="absolute inset-0 bg-blue-100 transform translate-x-4 translate-y-4 rounded-2xl opacity-50 blur-lg"></div>
-            <img src="/hero.jpg" alt="Equipe analisando arquitetura de software em tela de vidro corporativa" className="relative rounded-2xl shadow-2xl border border-slate-200 object-cover w-full h-[500px]" />
+            <div className="absolute inset-0 bg-blue-100 transform translate-x-4 translate-y-4 rounded-2xl opacity-50 blur-lg max-w-md mx-auto"></div>
+            <img src="/hero.jpg" alt="Equipe analisando arquitetura de software em tela de vidro corporativa" className="relative mx-auto rounded-2xl shadow-2xl border border-slate-200 object-cover w-full max-w-md h-[350px]" />
           </div>
         </div>
         {/* Background Decorative Pattern */}
@@ -56,11 +56,14 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-16 text-center flex flex-col items-center">
             <Link href="/diagnostico" className="inline-flex items-center text-blue-600 font-bold text-lg hover:text-blue-800 transition-colors">
               Descubra o risco do seu sistema 
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </Link>
+            <p className="mt-4 text-sm text-slate-500 font-medium">
+              Avaliação inicial em aproximadamente 5 minutos.
+            </p>
           </div>
         </div>
       </section>
