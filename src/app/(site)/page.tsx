@@ -19,9 +19,6 @@ export default function HomePage() {
                 FALAR COM UM ESPECIALISTA
               </a>
             </div>
-            <p className="mt-6 text-sm text-slate-500 font-medium">
-              Avaliação inicial em aproximadamente 5 minutos.
-            </p>
           </div>
           <div className="lg:w-1/2 mt-12 lg:mt-0 relative">
             <div className="absolute inset-0 bg-blue-100 transform translate-x-4 translate-y-4 rounded-2xl opacity-50 blur-lg max-w-md mx-auto"></div>
@@ -61,6 +58,9 @@ export default function HomePage() {
               Descubra o risco do seu sistema 
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </Link>
+            <p className="mt-4 text-sm text-slate-500 font-medium">
+              Avaliação inicial em aproximadamente 5 minutos.
+            </p>
           </div>
         </div>
       </section>
