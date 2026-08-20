@@ -51,7 +51,7 @@ export default function SistemaSemCodigoFontePage() {
           <li>Interceptamos todas as consultas que o sistema fechado faz ao banco de dados durante a operação normal dos usuários.</li>
           <li>Catalogamos cada tela e comportamento visual para desenhar processos equivalentes.</li>
           <li>Desenvolvemos, em paralelo, uma aplicação web moderna (utilizando tecnologias como React e Node.js) que se comunica com os mesmos dados.</li>
-        </p>
+        </ol>
 
         <h2>Recupere a Propriedade Intelectual da sua Empresa</h2>
         <p>
