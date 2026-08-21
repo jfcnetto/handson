@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/prisma'
 import { AssessmentEngine, AssessmentAnswers } from '@/services/AssessmentEngine'
+import { revalidatePath } from 'next/cache'
 
 export async function submitLegacyCheck(data: any) {
   try {
@@ -73,6 +74,8 @@ export async function submitLegacyCheck(data: any) {
         status: 'NEW'
       }
     })
+
+    revalidatePath('/dashboard')
 
     return { 
       success: true, 
